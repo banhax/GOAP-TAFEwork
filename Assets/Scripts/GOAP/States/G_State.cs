@@ -32,21 +32,45 @@ namespace GOAP {
 
         #region Testing Controls
 
-        public virtual bool TestState(G_State state, object expectedValue, G_StateComparison comparison) {
+        /// <summary>
+        /// Tests the given state against the expectedValue using the chosen comparison, returning true if the comparison
+        /// is correct and false if not
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="expectedValue"></param>
+        /// <param name="comparison"></param>
+        /// <returns></returns>
+        public virtual bool TestState(G_State state, G_StateComparison comparison, object expectedValue) {
             Debug.LogWarning($"Base class G_State has no State testing implemented - returning false for {state.name}");
             return false;
         }
 
-        public virtual bool TestStateConditionMatch(/*G_Condition preCondition, G_Condition effect*/) {
+        /// <summary>
+        /// This function returns true if the two given conditions match their states, expected values, and comparisons
+        /// </summary>
+        /// <param name="preCondition"></param>
+        /// <param name="effect"></param>
+        /// <returns></returns>
+        public virtual bool TestStateConditionMatch(G_Condition preCondition, G_Condition effect) {
             Debug.LogWarning($"Base class G_State has no condition comparisons implemented - returning false");
             return false;
         }
-
+         
+        /// <summary>
+        /// Returns true if the state type has an implementation for the given comparison type
+        /// </summary>
+        /// <param name="comparison"></param>
+        /// <returns></returns>
         public virtual bool StateSupportsComparison(G_StateComparison comparison) {
             Debug.LogWarning($"Base class G_State doesn't support any comparisons - returning false");
             return false;
         }
 
+        /// <summary>
+        /// Tests if the given value is of the same type as the value stored in this state and returns true if it is
+        /// </summary>
+        /// <param name="testValue"></param>
+        /// <returns></returns>
         public virtual bool TestValueMatch(object testValue) {
             Debug.LogWarning($"Base class G_State doesn't support value matching - returning false");
             return false;
