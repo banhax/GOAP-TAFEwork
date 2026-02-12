@@ -5,27 +5,27 @@ namespace GOAP {
     {
         #region Variables
         // the state being tested by the condition
-        G_State _state;
+        G_State state;
         public G_State State {
-            get { return _state; }
+            get { return state; }
         }
 
         // the actual comparison for the condition
-        G_StateComparison _comparison;
+        G_StateComparison comparison;
         public G_StateComparison Comparison {
-            get { return _comparison; }
+            get { return comparison; }
         }
 
         // the value we will be comparing to the current value in the state
-        object _expectedValue;
+        object expectedValue;
         public object ExpectedValue {
-            get { return _expectedValue; }
+            get { return expectedValue; }
         }
 
         // has the condition been meet during planning?
-        bool _met = false;
+        bool met = false;
         public bool Met {
-            get { return _met; }
+            get { return met; }
         }
         #endregion
 
@@ -34,10 +34,10 @@ namespace GOAP {
             G_StateComparison comparison = G_StateComparison.equal,
             bool met = false) {
 
-            this._state = state;
-            this._expectedValue = expectedValue;
-            this._comparison = comparison;
-            this._met = met;
+            this.state = state;
+            this.expectedValue = expectedValue;
+            this.comparison = comparison;
+            this.met = met;
         }
 
         #region Functions
@@ -48,8 +48,9 @@ namespace GOAP {
         /// <param name="effect"></param>
         /// <returns></returns>
         public bool CompareConditionToEffect(G_Condition effect) {
-            if (_state.TestValueMatch(effect._state.GetValue())) {
-                return _state.TestStateConditionMatch(this, effect);
+            if (IsStateTheConditionState(effect.state)
+                && state.TestValueMatch(effect.state.GetValue())) {
+                return state.TestStateConditionMatch(this, effect);
             }
             else {
                 return false;
@@ -61,7 +62,7 @@ namespace GOAP {
         /// </summary>
         /// <returns></returns>
         public bool DoesStateMeetCondition() {
-            return _state.TestState(_state, _comparison, _expectedValue);
+            return state.TestState(state, comparison, expectedValue);
         }
 
         /// <summary>
@@ -72,8 +73,8 @@ namespace GOAP {
         public bool DoesStateMeetCondition(G_State stateToTest) {
             bool success = false;
 
-            if (_state.TestValueMatch(stateToTest.GetValue())) {
-                success = _state.TestState(stateToTest, _comparison, _expectedValue);
+            if (state.TestValueMatch(stateToTest.GetValue())) {
+                success = state.TestState(stateToTest, comparison, expectedValue);
             }
             else {
                 Debug.LogWarning("Value type of state to test did not match internal state");
@@ -88,21 +89,21 @@ namespace GOAP {
         /// <param name="stateToCompare"></param>
         /// <returns></returns>
         public bool IsStateTheConditionState(G_State stateToCompare) {
-            return stateToCompare.name == _state.name;
+            return stateToCompare.name == state.name;
         }
 
         /// <summary>
         /// Sets variable 'met' to true. Used during planning
         /// </summary>
         public void Meet() {
-            _met = true;
+            met = true;
         }
 
         public static G_Condition Clone(G_Condition conditionToClone) {
-            return new G_Condition(conditionToClone._state,
-                conditionToClone._expectedValue,
-                conditionToClone._comparison,
-                conditionToClone._met);
+            return new G_Condition(conditionToClone.state,
+                conditionToClone.expectedValue,
+                conditionToClone.comparison,
+                conditionToClone.met);
         }
 
         #endregion
