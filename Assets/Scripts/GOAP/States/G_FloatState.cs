@@ -65,19 +65,19 @@ namespace GOAP {
             
             switch (comparison) {
                 case G_StateComparison.equal:
-                    result = stateFloat == expectedFloat;
+                    result = (stateFloat == expectedFloat);
                     break;
                 case G_StateComparison.greater:
-                result = stateFloat > expectedFloat;
+                    result = (stateFloat > expectedFloat);
                     break;
                 case G_StateComparison.greater_or_equal:
-                result = stateFloat >= expectedFloat;
+                    result = (stateFloat >= expectedFloat);
                     break;
                 case G_StateComparison.lesser:
-                result = stateFloat < expectedFloat;
+                    result = (stateFloat < expectedFloat);
                     break;
                 case G_StateComparison.lesser_or_equal:
-                result = stateFloat <= expectedFloat;
+                    result = (stateFloat <= expectedFloat);
                     break;
             }
 
