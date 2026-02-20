@@ -9,5 +9,9 @@ namespace GOAP {
         public static G_FloatStateBuilder FloatState() {
             return new G_FloatStateBuilder();
         }
+
+        public static G_ConditionBuilder Condition() {
+            return new G_ConditionBuilder();
+        }
     }
 }
