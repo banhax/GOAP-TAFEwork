@@ -176,7 +176,99 @@ public class ConditionTests
 
     #region Int Conditions
 
+    // Equals
+    [TestCase(G_StateComparison.equal, 5, G_StateComparison.equal, 5, true, TestName = "Pre == 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.equal, 5, G_StateComparison.equal, 4, false, TestName = "Pre == 5 vs Effect == 4")]
 
+
+
+    // Greater Vs Equal
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 4, false, TestName = "Pre > 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 5, false, TestName = "Pre > 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 6, true, TestName = "Pre > 5 vs Effect == 6")]
+
+    // Greater Vs Greater
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 4, false, TestName = "Pre > 5 vs Effect > 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 5, true, TestName = "Pre > 5 vs Effect > 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 6, true, TestName = "Pre > 5 vs Effect > 6")]
+
+    // Greater Vs Greater or Equal
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 4, false, TestName = "Pre > 5 vs Effect >= 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 5, false, TestName = "Pre > 5 vs Effect >= 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 6, true, TestName = "Pre > 5 vs Effect >= 6")]
+
+
+
+    // Lesser Vs Equal
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 4, true, TestName = "Pre < 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 5, false, TestName = "Pre < 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 6, false, TestName = "Pre < 5 vs Effect == 6")]
+
+    // Lesser Vs Lesser
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 4, true, TestName = "Pre < 5 vs Effect < 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 5, true, TestName = "Pre < 5 vs Effect < 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 6, false, TestName = "Pre < 5 vs Effect < 6")]
+
+    // Lesser Vs Lesser or Equal
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 4, true, TestName = "Pre < 5 vs Effect <= 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 5, false, TestName = "Pre < 5 vs Effect <= 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 6, false, TestName = "Pre < 5 vs Effect <= 6")]
+
+
+
+    // Greater or Equal Vs Equal
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.equal, 4, false, TestName = "Pre >= 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.equal, 5, true, TestName = "Pre >= 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.equal, 6, true, TestName = "Pre >= 5 vs Effect == 6")]
+
+    // Greater or Equal Vs Greater
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater, 3, false, TestName = "Pre >= 5 vs Effect > 3")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater, 4, true, TestName = "Pre >= 5 vs Effect > 4")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater, 5, true, TestName = "Pre >= 5 vs Effect > 5")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater, 6, true, TestName = "Pre >= 5 vs Effect > 6")]
+
+    // Greater or Equal Vs Greater or Equal
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater_or_equal, 4, false, TestName = "Pre >= 5 vs Effect >= 4")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater_or_equal, 5, true, TestName = "Pre >= 5 vs Effect >= 5")]
+    [TestCase(G_StateComparison.greater_or_equal, 5, G_StateComparison.greater_or_equal, 6, true, TestName = "Pre >= 5 vs Effect >= 6")]
+
+
+
+    // Lesser or Equal Vs Equal
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.equal, 4, true, TestName = "Pre <= 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.equal, 5, true, TestName = "Pre <= 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.equal, 6, false, TestName = "Pre <= 5 vs Effect == 6")]
+
+    // Lesser or Equal Vs Lesser
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser, 4, true, TestName = "Pre <= 5 vs Effect < 4")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser, 5, true, TestName = "Pre <= 5 vs Effect < 5")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser, 6, true, TestName = "Pre <= 5 vs Effect < 6")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser, 7, false, TestName = "Pre <= 5 vs Effect < 7")]
+
+    // Lesser or Equal Vs Lesser or Equal
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser_or_equal, 4, true, TestName = "Pre <= 5 vs Effect <= 4")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser_or_equal, 5, true, TestName = "Pre <= 5 vs Effect <= 5")]
+    [TestCase(G_StateComparison.lesser_or_equal, 5, G_StateComparison.lesser_or_equal, 6, false, TestName = "Pre <= 5 vs Effect <= 6")]
+
+    public void CompareConditionToEffect_Int(G_StateComparison preComparison,
+        int preExpectedValue,
+        G_StateComparison effectComparison,
+        int effectExpectedValue,
+        bool expectedResult) {
+
+        // Arrange
+        G_IntState intState = An.IntState().WithName("test").WithValue(5);
+        G_Condition preCondition
+            = A.Condition().WithState(intState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
+        G_Condition effect
+            = A.Condition().WithState(intState).WithComparison(effectComparison).WithExpectedValue(effectExpectedValue);
+
+        // Act
+        bool result = preCondition.CompareConditionToEffect(effect);
+
+        // Assert
+        Assert.AreEqual(expectedResult, result);
+    }
 
     #endregion
 }
