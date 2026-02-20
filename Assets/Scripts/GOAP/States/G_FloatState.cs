@@ -4,7 +4,6 @@ namespace GOAP {
     [CreateAssetMenu(fileName = "New Float State", menuName = "GOAP/States/Float State")]
     public class G_FloatState : G_State {
         float value;
-
         #region Basic Controls
 
         public override void Construct(string name, object value) {
@@ -90,7 +89,12 @@ namespace GOAP {
         /// <returns></returns>
         public override bool TestStateConditionMatch(G_Condition precondition, G_Condition effect) {
             bool result = false;
-            
+
+            result = G_NumberConditionComparer.CompareNumberCondition((float)precondition.ExpectedValue,
+                precondition.Comparison,
+                (float)effect.ExpectedValue,
+                effect.Comparison);
+
             return result;
         }
 
