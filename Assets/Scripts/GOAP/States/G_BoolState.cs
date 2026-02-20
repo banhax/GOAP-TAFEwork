@@ -108,27 +108,31 @@ namespace GOAP {
             G_StateComparison effectCompare,
             bool preValue,
             bool effectValue) {
-                return CompareEqual(preconditionCompare, effectCompare, preValue, effectValue)
-                || CompareNotEqual(preconditionCompare, effectCompare, preValue, effectValue);
-                
+
+            bool result = false;
+
+            if (CompareSameCondition(preconditionCompare, effectCompare, preValue, effectValue)
+                || CompareOppositeCondition(preconditionCompare, effectCompare, preValue, effectValue)) {
+                result = true;
+            }
+            
+            return result;
         }
 
-        bool CompareEqual(G_StateComparison preconditionCompare,
+        bool CompareSameCondition(G_StateComparison preconditionCompare,
             G_StateComparison effectCompare,
             bool preValue,
             bool effectValue) {
-            return preconditionCompare == G_StateComparison.equal
-                && effectCompare == G_StateComparison.equal
-                && preValue == effectValue;
+            
+            return preconditionCompare == effectCompare && preValue == effectValue;
         }
 
-        bool CompareNotEqual(G_StateComparison preconditionCompare,
+        bool CompareOppositeCondition(G_StateComparison preconditionCompare,
             G_StateComparison effectCompare,
             bool preValue,
             bool effectValue) {
-            return preconditionCompare == G_StateComparison.not_equal
-                && effectCompare == G_StateComparison.not_equal
-                && preValue == effectValue;
+            
+            return preconditionCompare != effectCompare && preValue != effectValue;
         }
 
         #endregion

@@ -33,15 +33,29 @@ public class ConditionTests
 
     #region Bool Conditions
 
+    // Equals
     [TestCase(G_StateComparison.equal, true, G_StateComparison.equal, true, true, TestName = "Equal True vs Equal True")]
     [TestCase(G_StateComparison.equal, true, G_StateComparison.equal, false, false, TestName = "Equal True vs Equal False")]
     [TestCase(G_StateComparison.equal, false, G_StateComparison.equal, true, false, TestName = "Equal False vs Equal True")]
     [TestCase(G_StateComparison.equal, false, G_StateComparison.equal, false, true, TestName = "Equal False vs Equal False")]
-
+    
+    // Not Equals
     [TestCase(G_StateComparison.not_equal, true, G_StateComparison.not_equal, true, true, TestName = "Not Equal True vs Not Equal True")]
     [TestCase(G_StateComparison.not_equal, true, G_StateComparison.not_equal, false, false, TestName = "Not Equal True vs Not Equal False")]
     [TestCase(G_StateComparison.not_equal, false, G_StateComparison.not_equal, true, false, TestName = "Not Equal False vs Not Equal True")]
     [TestCase(G_StateComparison.not_equal, false, G_StateComparison.not_equal, false, true, TestName = "Not Equal False vs Not Equal False")]
+    
+    // Equal vs Not Equal
+    [TestCase(G_StateComparison.equal, true, G_StateComparison.not_equal, true, false, TestName = "Equal True vs Not Equal True")]
+    [TestCase(G_StateComparison.equal, true, G_StateComparison.not_equal, false, true, TestName = "Equal True vs Not Equal False")]
+    [TestCase(G_StateComparison.equal, false, G_StateComparison.not_equal, true, true, TestName = "Equal False vs Not Equal True")]
+    [TestCase(G_StateComparison.equal, false, G_StateComparison.not_equal, false, false, TestName = "Equal False vs Not Equal False")]
+
+    // Not Equal vs Equal
+    [TestCase(G_StateComparison.not_equal, true, G_StateComparison.equal, true, false, TestName = "Not Equal True vs Equal True")]
+    [TestCase(G_StateComparison.not_equal, true, G_StateComparison.equal, false, true, TestName = "Not Equal True vs Equal False")]
+    [TestCase(G_StateComparison.not_equal, false, G_StateComparison.equal, true, true, TestName = "Not Equal False vs Equal True")]
+    [TestCase(G_StateComparison.not_equal, false, G_StateComparison.equal, false, false, TestName = "Not Equal False vs Equal False")]
     public void CompareConditionToEffect_Bool(G_StateComparison preComparison,
         bool preExpectedValue,
         G_StateComparison effectComparison,
