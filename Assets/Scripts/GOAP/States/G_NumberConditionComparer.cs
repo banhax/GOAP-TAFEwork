@@ -94,7 +94,7 @@ public static class G_NumberConditionComparer
 
         switch (effectCompare) {
             case G_StateComparison.equal:
-                success = effectValue < preValue;
+                success = effectValue <= preValue;
                 break;
             case G_StateComparison.lesser:
                 success = effectValue <= preValue;
