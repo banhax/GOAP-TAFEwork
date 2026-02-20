@@ -17,7 +17,7 @@ public class BoolStateTests {
 
     [Test]
     public void Clone() {
-        G_BoolState testState = A.G_BoolState().WithName("test").WithValue(true);
+        G_BoolState testState = A.BoolState().WithName("test").WithValue(true);
         G_State cloneState = testState.Clone();
 
         Assert.AreEqual(testState.name, cloneState.name);
@@ -25,12 +25,12 @@ public class BoolStateTests {
         Assert.IsTrue(cloneState is G_BoolState);
     }
 
-    [TestCase(true, G_StateComparison.equal, true, true)]
-    [TestCase(false, G_StateComparison.equal, true, false)]
-    [TestCase(true, G_StateComparison.not_equal, false, true)]
-    [TestCase(false, G_StateComparison.not_equal, false, false)]
+    [TestCase(true, G_StateComparison.equal, true, true, TestName = "Equal - True")]
+    [TestCase(false, G_StateComparison.equal, true, false, TestName = "Equal - False")]
+    [TestCase(true, G_StateComparison.not_equal, false, true, TestName = "Not Equal - True")]
+    [TestCase(false, G_StateComparison.not_equal, false, false, TestName = "Not Equal - False")]
     public void TestState(bool actualValue, G_StateComparison comparison, bool expectedValue, bool expectedResult) {
-        G_BoolState testState = A.G_BoolState().WithName("test").WithValue(actualValue);
+        G_BoolState testState = A.BoolState().WithName("test").WithValue(actualValue);
         
         bool result = testState.TestState(testState, comparison, expectedValue);
 

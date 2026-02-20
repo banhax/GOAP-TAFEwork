@@ -23,9 +23,7 @@ namespace GOAP {
         }
 
         public override G_State Clone() {
-            G_FloatState clone = CreateInstance<G_FloatState>();
-            clone.Construct(this.name, this.value);
-            return clone;
+            return A.FloatState().WithName(name).WithValue(value);
         }
 
         #endregion
