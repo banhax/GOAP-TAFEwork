@@ -62,16 +62,83 @@ public class ConditionTests
         bool effectExpectedValue,
         bool expectedResult) {
 
+        // Arrange
         G_BoolState boolState = A.BoolState().WithName("test").WithValue(true);
         G_Condition preCondition 
             = A.Condition().WithState(boolState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
         G_Condition effect 
             = A.Condition().WithState(boolState).WithComparison(effectComparison).WithExpectedValue(effectExpectedValue);
 
+        // Act
         bool result = preCondition.CompareConditionToEffect(effect);
 
+        // Assert
         Assert.AreEqual(expectedResult, result);
     }
+
+    #endregion
+
+    #region Float Conditions
+
+    // Equals
+    [TestCase(G_StateComparison.equal, 5, G_StateComparison.equal, 5, true, TestName = "Pre == 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.equal, 5, G_StateComparison.equal, 4, false, TestName = "Pre == 5 vs Effect == 4")]
+
+    // Greater Vs Equal
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 4, false, TestName = "Pre > 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 5, false, TestName = "Pre > 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.equal, 6, true, TestName = "Pre > 5 vs Effect == 6")]
+
+    // Greater Vs Greater
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 4, false, TestName = "Pre > 5 vs Effect > 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 5, true, TestName = "Pre > 5 vs Effect > 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater, 6, true, TestName = "Pre > 5 vs Effect > 6")]
+
+    // Greater Vs Greater or Equal
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 4, false, TestName = "Pre > 5 vs Effect >= 4")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 5, false, TestName = "Pre > 5 vs Effect >= 5")]
+    [TestCase(G_StateComparison.greater, 5, G_StateComparison.greater_or_equal, 6, true, TestName = "Pre > 5 vs Effect >= 6")]
+
+    // Lesser Vs Equal
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 4, true, TestName = "Pre < 5 vs Effect == 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 5, false, TestName = "Pre < 5 vs Effect == 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.equal, 6, false, TestName = "Pre < 5 vs Effect == 6")]
+
+    // Lesser Vs Lesser
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 4, true, TestName = "Pre < 5 vs Effect < 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 5, true, TestName = "Pre < 5 vs Effect < 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser, 6, false, TestName = "Pre < 5 vs Effect < 6")]
+
+    // Lesser Vs Lesser or Equal
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 4, true, TestName = "Pre < 5 vs Effect <= 4")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 5, false, TestName = "Pre < 5 vs Effect <= 5")]
+    [TestCase(G_StateComparison.lesser, 5, G_StateComparison.lesser_or_equal, 6, false, TestName = "Pre < 5 vs Effect <= 6")]
+
+    public void CompareConditionToEffect_Float(G_StateComparison preComparison,
+        float preExpectedValue,
+        G_StateComparison effectComparison,
+        float effectExpectedValue,
+        bool expectedResult) {
+
+        // Arrange
+        G_FloatState floatState = A.FloatState().WithName("test").WithValue(5);
+        G_Condition preCondition
+            = A.Condition().WithState(floatState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
+        G_Condition effect
+            = A.Condition().WithState(floatState).WithComparison(effectComparison).WithExpectedValue(effectExpectedValue);
+
+        // Act
+        bool result = preCondition.CompareConditionToEffect(effect);
+
+        // Assert
+        Assert.AreEqual(expectedResult, result);
+    }
+
+    #endregion
+
+    #region Int Conditions
+
+
 
     #endregion
 }
