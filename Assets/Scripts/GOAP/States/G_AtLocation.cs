@@ -39,7 +39,15 @@ namespace GOAP {
         /// <param name="comparison"></param>
         /// <returns></returns>
         public override bool TestState(G_State state, G_StateComparison comparison, object expectedValue) {
-            return false;
+            LocationType stateLocation = state.GetValue() as LocationType;
+            LocationType expectedLocation = expectedValue as LocationType;
+            bool success = false;
+
+            if (StateSupportsComparison(comparison)) {
+
+                success = CompareLocations(stateLocation, expectedLocation);
+            }
+            return success;
         }
 
         /// <summary>
@@ -49,7 +57,17 @@ namespace GOAP {
         /// <param name="effect"></param>
         /// <returns></returns>
         public override bool TestStateConditionMatch(G_Condition preCondition, G_Condition effect) {
-            return false;
+            bool success = false;
+            LocationType preLocation = preCondition.ExpectedValue as LocationType;
+            LocationType effectLocation = effect.ExpectedValue as LocationType;
+
+            if (StateSupportsComparison(preCondition.Comparison)
+                && StateSupportsComparison(effect.Comparison)) {
+
+                success = CompareLocations(preLocation, effectLocation);
+            }
+
+            return success;
         }
          
         /// <summary>
@@ -58,7 +76,7 @@ namespace GOAP {
         /// <param name="comparison"></param>
         /// <returns></returns>
         public override bool StateSupportsComparison(G_StateComparison comparison) {
-            return false;
+            return comparison == G_StateComparison.equal;
         }
 
         /// <summary>
@@ -67,7 +85,26 @@ namespace GOAP {
         /// <param name="testValue"></param>
         /// <returns></returns>
         public override bool TestValueMatch(object testValue) {
-            return false;
+            return testValue is null
+                || testValue is LocationType;
+        }
+
+        #endregion
+
+        #region Conditions
+
+        bool CompareLocations(LocationType locationOne, LocationType locationTwo) {
+            return BothLocationsNull(locationOne, locationTwo)
+                || BothLocationsMatch(locationOne, locationTwo);
+        }
+
+        bool BothLocationsNull(LocationType locationOne, LocationType locationTwo) {
+            return locationOne == null && locationTwo == null;
+        }
+        
+        bool BothLocationsMatch(LocationType locationOne, LocationType locationTwo) {
+            return locationOne != null && locationTwo != null
+                && locationOne == locationTwo;
         }
 
         #endregion
