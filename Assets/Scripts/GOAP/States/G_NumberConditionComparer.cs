@@ -3,6 +3,58 @@ using UnityEngine;
 
 public static class G_NumberConditionComparer
 {
+    #region Test Values
+
+    public static bool TestValues(int stateValue, G_StateComparison comparison, int expectedValue) {
+        bool result = false;
+
+        switch (comparison) {
+            case G_StateComparison.equal:
+                result = (stateValue == expectedValue);
+                break;
+            case G_StateComparison.greater:
+                result = (stateValue > expectedValue);
+                break;
+            case G_StateComparison.greater_or_equal:
+                result = (stateValue >= expectedValue);
+                break;
+            case G_StateComparison.lesser:
+                result = (stateValue < expectedValue);
+                break;
+            case G_StateComparison.lesser_or_equal:
+                result = (stateValue <= expectedValue);
+                break;
+        }
+
+        return result;
+    }
+
+    public static bool TestValues(float stateValue, G_StateComparison comparison, float expectedValue) {
+        bool result = false;
+
+        switch (comparison) {
+            case G_StateComparison.equal:
+                result = (stateValue == expectedValue);
+                break;
+            case G_StateComparison.greater:
+                result = (stateValue > expectedValue);
+                break;
+            case G_StateComparison.greater_or_equal:
+                result = (stateValue >= expectedValue);
+                break;
+            case G_StateComparison.lesser:
+                result = (stateValue < expectedValue);
+                break;
+            case G_StateComparison.lesser_or_equal:
+                result = (stateValue <= expectedValue);
+                break;
+        }
+
+        return result;
+    }
+
+    #endregion
+
     #region Compare Conditions
 
 

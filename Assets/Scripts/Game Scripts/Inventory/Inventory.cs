@@ -40,7 +40,9 @@ public class Inventory : MonoBehaviour
     public ItemStack FindInInventory(Item item) {
         ItemStack foundStack = null;
 
-        foundStack = inventory.Find(stack => stack.item == item);
+        if (item != null) {
+            foundStack = inventory.Find(stack => stack.item == item);
+        }
 
         return foundStack;
     }

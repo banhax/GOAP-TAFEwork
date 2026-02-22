@@ -57,26 +57,7 @@ namespace GOAP {
         /// <returns></returns>
         public override bool TestState(G_State state, G_StateComparison comparison, object expectedValue) {
             bool result = false;
-            int stateInt = (int)state.GetValue();
-            int expectedInt = (int)expectedValue;
-            
-            switch (comparison) {
-                case G_StateComparison.equal:
-                    result = (stateInt == expectedInt);
-                    break;
-                case G_StateComparison.greater:
-                    result = (stateInt > expectedInt);
-                    break;
-                case G_StateComparison.greater_or_equal:
-                    result = (stateInt >= expectedInt);
-                    break;
-                case G_StateComparison.lesser:
-                    result = (stateInt < expectedInt);
-                    break;
-                case G_StateComparison.lesser_or_equal:
-                    result = (stateInt <= expectedInt);
-                    break;
-            }
+            result = G_NumberConditionComparer.TestValues((int)state.GetValue(), comparison, (int)expectedValue);
             return result;
         }
 
