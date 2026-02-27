@@ -61,7 +61,6 @@ namespace GOAP {
                 success = G_NumberConditionComparer.TestValues(inventoryStack.quantity, comparison, expectedStack.quantity);
             }
             else if (NullStackIsEqualToZero(inventoryStack, comparison, expectedStack)) {
-
                 success = true;
             }
 
@@ -75,8 +74,6 @@ namespace GOAP {
             ItemStack effectExpectedStack = effect.ExpectedValue as ItemStack;
 
             if (CanCompareConditions(preCondition, effect, preExpectedStack, effectExpectedStack)) {
-                Inventory preInventory = preCondition.State.GetValue() as Inventory;
-                Inventory effectInventory = effect.State.GetValue() as Inventory;
 
                 success = G_NumberConditionComparer.CompareNumberCondition(preExpectedStack.quantity,
                     preCondition.Comparison,
