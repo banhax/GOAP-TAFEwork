@@ -68,21 +68,25 @@ namespace GOAP {
             return success;
         }
 
-        /// <summary>
-        /// This function returns true if the two given conditions match their states, expected values, and comparisons
-        /// </summary>
-        /// <param name="preCondition"></param>
-        /// <param name="effect"></param>
-        /// <returns></returns>
+
         public override bool TestStateConditionMatch(G_Condition preCondition, G_Condition effect) {
-            return false;
+            bool success = false;
+            ItemStack preExpectedStack = preCondition.ExpectedValue as ItemStack;
+            ItemStack effectExpectedStack = effect.ExpectedValue as ItemStack;
+
+            if (CanCompareConditions(preCondition, effect, preExpectedStack, effectExpectedStack)) {
+                Inventory preInventory = preCondition.State.GetValue() as Inventory;
+                Inventory effectInventory = effect.State.GetValue() as Inventory;
+
+                success = G_NumberConditionComparer.CompareNumberCondition(preExpectedStack.quantity,
+                    preCondition.Comparison,
+                    effectExpectedStack.quantity,
+                    effect.Comparison);
+            }
+            return success;
         }
          
-        /// <summary>
-        /// Returns true if the state type has an implementation for the given comparison type
-        /// </summary>
-        /// <param name="comparison"></param>
-        /// <returns></returns>
+
         public override bool StateSupportsComparison(G_StateComparison comparison) {
             return comparison == G_StateComparison.equal
                 || comparison == G_StateComparison.greater
@@ -91,13 +95,10 @@ namespace GOAP {
                 || comparison == G_StateComparison.lesser_or_equal;
         }
 
-        /// <summary>
-        /// Tests if the given value is of the same type as the value stored in this state and returns true if it is
-        /// </summary>
-        /// <param name="testValue"></param>
-        /// <returns></returns>
+
         public override bool TestValueMatch(object testValue) {
-            return testValue is ItemStack || testValue is Inventory;
+            return testValue != null
+                && (testValue is ItemStack || testValue is Inventory);
         }
 
         #endregion
@@ -113,6 +114,16 @@ namespace GOAP {
             return inventoryStack == null
                 && comparison == G_StateComparison.equal
                 && expectedStack.quantity == 0;
+        }
+
+        bool CanCompareConditions(G_Condition preCondition, G_Condition effect, ItemStack preExpectedStack, ItemStack effectExpectedStack) {
+            return preCondition.IsStateTheConditionState(effect.State)
+                && TestValueMatch(preCondition.State.GetValue())
+                && TestValueMatch(effect.State.GetValue())
+                && TestValueMatch(preCondition.ExpectedValue)
+                && TestValueMatch(effect.ExpectedValue)
+                && preExpectedStack.item != null
+                && effectExpectedStack.item != null;
         }
 
         #endregion
