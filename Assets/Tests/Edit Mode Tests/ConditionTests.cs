@@ -309,4 +309,40 @@ public class ConditionTests
     }
 
     #endregion
+
+    #region Inventory Conditions
+
+    [TestCase(true, G_StateComparison.equal, 1, G_StateComparison.equal, 1, true, TestName = "Both equal to 1 item")]
+    [TestCase(true, G_StateComparison.equal, 1, G_StateComparison.equal, 0, false, TestName = "Not equal to Same item")]
+    [TestCase(false, G_StateComparison.equal, 1, G_StateComparison.equal, 1, false, TestName = "Different Items")]
+    [TestCase(true, G_StateComparison.greater, 0, G_StateComparison.equal, 1, true, TestName = "Equal 1 vs Greater 0")]
+    public void InventoryConditionCompare(bool useSameItem,
+    G_StateComparison preCompare,
+    int preQuantity,
+    G_StateComparison effectCompare,
+    int effectQuantity,
+    bool expectedResult) {
+
+        GameObject go = new GameObject();
+        Inventory inventory = go.AddComponent<Inventory>();
+        Item axe = An.Item("axe").isStackable(false);
+        Item wood = An.Item("wood").isStackable(true);
+
+        G_Inventory testState = An.InventoryState("test").WithInventory(inventory);
+
+        ItemStack preExpectedValue = new ItemStack(axe, preQuantity);
+        ItemStack effectExpectedValue = useSameItem ? new ItemStack(axe, effectQuantity) : new ItemStack(wood, effectQuantity);
+
+        G_Condition precondition
+            = A.Condition().WithState(testState).WithComparison(preCompare).WithExpectedValue(preExpectedValue);
+        G_Condition effect
+            = A.Condition().WithState(testState).WithComparison(effectCompare).WithExpectedValue(effectExpectedValue);
+
+        bool result = precondition.CompareConditionToEffect(effect);
+
+        Assert.AreEqual(expectedResult, result);
+
+    }
+
+    #endregion
 }

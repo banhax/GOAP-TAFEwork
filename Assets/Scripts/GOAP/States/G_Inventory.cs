@@ -120,7 +120,8 @@ namespace GOAP {
                 && TestValueMatch(preCondition.ExpectedValue)
                 && TestValueMatch(effect.ExpectedValue)
                 && preExpectedStack.item != null
-                && effectExpectedStack.item != null;
+                && effectExpectedStack.item != null
+                && preExpectedStack.item == effectExpectedStack.item;
         }
 
         #endregion

@@ -6,10 +6,18 @@ using GOAP;
 
 public class InventoryStateTests
 {
-    // A Test behaves as an ordinary method
     [Test]
     public void InventoryClone() {
+        GameObject go = new GameObject();
+        Inventory inventory = go.AddComponent<Inventory>();
+        Item testItem = An.Item("axe").isStackable(false);
+        inventory.AddToInventory(new ItemStack(testItem, 1));
+        G_Inventory testState = An.InventoryState("test").WithInventory(inventory);
 
+        G_Inventory clone = testState.Clone() as G_Inventory;
+
+        Assert.AreEqual(testState.name, clone.name);
+        Assert.AreEqual(testState.GetValue() as Inventory, clone.GetValue() as Inventory);
     }
 
     [TestCase(true, true, true, true, 1, true, TestName = "All valid")]
@@ -17,7 +25,7 @@ public class InventoryStateTests
     [TestCase(true, false, true, true, 1, false, TestName = "Expected Value Invalid")]
     [TestCase(true, true, /* invalid item */ false, true, 1, false, TestName = "Item Value Invalid")]
     [TestCase(true, true, true, false, 0, true, TestName = "Item not in inventory and Expected Value 0")]
-    public void InventoryCanTestState(bool stateIsValid, 
+    public void InventoryTestState(bool stateIsValid, 
         bool expectedIsValid, 
         bool ItemIsValid,
         bool itemInInventory,
@@ -47,15 +55,5 @@ public class InventoryStateTests
         bool result = testState.TestState(testState, G_StateComparison.equal, expectedValue);
 
         Assert.AreEqual(expectedResult, result);
-    }
-
-    [TestCase(TestName = "Perfect Pass")]
-    public void InventoryTestState() {
-
-    }
-
-    [Test]
-    public void InventoryConditionCompare() {
-
     }
 }
