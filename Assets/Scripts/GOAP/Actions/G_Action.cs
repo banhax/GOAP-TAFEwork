@@ -10,7 +10,7 @@ namespace GOAP {
 
         internal int cost = 10;
         public List<G_Condition> preconditions = new List<G_Condition>();
-        internal List<G_Condition> effects = new List<G_Condition>();
+        public List<G_Condition> effects = new List<G_Condition>();
         public void Construct(string name,
             List<G_Condition> preconditions,
             List<G_Condition> effects,
@@ -32,15 +32,17 @@ namespace GOAP {
         /// </summary>
         /// <param name="unmetPreconditions"></param>
         /// <returns></returns>
-        public List<G_Condition> TestEffectsAgainstPreconditions(List<G_Condition> unmetPreconditions) {
-            List<G_Condition> metConditions = new List<G_Condition>();
-            for (int i = 0; i < unmetPreconditions.Count; i++) {
-                if (DoesEffectMatch(unmetPreconditions[i])) {
-                    MeetCondition(unmetPreconditions[i], metConditions);
+        public bool TestEffectsAgainstPreconditions(List<G_Condition> preconditions) {
+            bool someConditionsMet = false;
+
+            for (int i = 0; i < preconditions.Count; i++) {
+                if (!preconditions[i].Met && DoesEffectMatch(preconditions[i])) {
+                    someConditionsMet = true;
+                    preconditions[i].Meet();
                 }
             }
 
-            return metConditions;
+            return someConditionsMet;
         }
 
         /// <summary>
@@ -65,6 +67,10 @@ namespace GOAP {
                 (effect) => unmetPrecondition.CompareConditionToEffect(effect)
                 );
             return releveantEffect != null;
+        }
+
+        public virtual int GetCost() {
+            return cost;
         }
 
         /// <summary>
