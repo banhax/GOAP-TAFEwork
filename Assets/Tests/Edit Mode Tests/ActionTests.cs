@@ -44,9 +44,9 @@ public class ActionTests
         public GameObject go;
         public Inventory inventoryComponent;
         // states
-        G_AtLocation atLocation;
-        G_Inventory inventory;
-        G_BoolState isAble;
+        public G_AtLocation atLocation;
+        public G_Inventory inventory;
+        public G_BoolState isAble;
 
         // Actions
         // precondition action

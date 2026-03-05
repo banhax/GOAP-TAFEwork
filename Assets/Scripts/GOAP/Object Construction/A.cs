@@ -13,6 +13,9 @@ namespace GOAP {
         public static G_ConditionBuilder Condition() {
             return new G_ConditionBuilder();
         }
+        public static G_GoalBuilder Goal(string name) {
+            return new G_GoalBuilder(name);
+        }
         public static LocationTypeBuilder LocationType(string name) {
             return new LocationTypeBuilder(name);
         }
