@@ -174,6 +174,22 @@ namespace GOAP {
             return newNode;
         }
 
+        public List<G_Action> ReturnPlan() {
+            List<G_Action> plan = new List<G_Action>();
+
+            plan = AddToPlan(plan);
+
+            return plan;
+        }
+
+        List<G_Action> AddToPlan(List<G_Action> plan) {
+            plan.Add(nodeAction);
+            if (parentNode != null && !parentNode.isGoalNode) {
+                plan = parentNode.AddToPlan(plan);
+            }
+            return plan;
+        }
+
         #endregion
     }
 }
