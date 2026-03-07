@@ -55,7 +55,6 @@ namespace GOAP {
 
             // preconditions
             this.preconditions = new List<G_Condition>(preconditions);
-
             // world state reference
             this.worldStateRef = worldStateRef;
 
@@ -117,6 +116,62 @@ namespace GOAP {
             if (!precondition.Met) {
                 unmetCount += 1;
             }
+        }
+
+
+        /// <summary>
+        /// Sets the node state to closed, succes, or fail based on current conditions
+        /// </summary>
+        /// <param name="nodePool"></param>
+        public void ProcessNode(List<G_Node> nodePool) {
+            if (unmetPreconditions > 0 && nodeActionPool.Count > 0) {
+                nodeState = G_NodeState.closed;
+            }
+            else if (unmetPreconditions == 0) {
+                nodeState = G_NodeState.success;
+            }
+            else if (unmetPreconditions > 0 && nodeActionPool.Count <= 0) {
+                nodeState = G_NodeState.fail;
+            }
+        }
+
+        public List<G_Node> GenerateChildNodes() {
+            List<G_Node> newNodes = new List<G_Node>();
+
+            for (int i = 0; i < nodeActionPool.Count; i++) {
+                G_Node newNode = TestActionForNewNode(nodeActionPool[i]);
+
+                if (newNode != null) {
+                    newNodes.Add(newNode);
+                }
+            }
+
+            return newNodes;
+        }
+
+        G_Node TestActionForNewNode(G_Action action) {
+            G_Node newNode = null;
+            List<G_Condition> clonedPreconditions = new List<G_Condition>();
+
+            for (int i = 0; i < preconditions.Count; i++) {
+                clonedPreconditions.Add(G_Condition.Clone(preconditions[i]));
+            }
+
+            bool someConditionsMet = action.TestEffectsAgainstPreconditions(clonedPreconditions);
+
+            if (someConditionsMet) { // build new node
+                for (int i = 0; i < action.preconditions.Count; i++) {
+                    clonedPreconditions.Add(G_Condition.Clone(action.preconditions[i]));
+                }
+                newNode = new G_Node(this,
+                    action,
+                    hCost,
+                    nodeActionPool,
+                    clonedPreconditions,
+                    worldStateRef);
+            }
+
+            return newNode;
         }
 
         #endregion
