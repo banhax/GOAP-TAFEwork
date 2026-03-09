@@ -13,6 +13,7 @@ public class NodeTests {
     // :}
 
     // process node - get the node's planning result
+    // :}
 
     // generate child nodes
 
@@ -161,10 +162,35 @@ public class NodeTests {
         Assert.AreEqual(targetState, normalNode.NodeState);
     }
 
-    [TestCase(TestName = "Generates several nodes")]
-    [TestCase(TestName = "Fails to generate any nodes")]
-    public void GenerateNodes() {
+    [TestCase(5, TestName = "Generates multiple nodes")]
+    [TestCase(2, TestName = "Generates a node")]
+    [TestCase(1, TestName = "Fails to generate any nodes")]
+    public void GenerateNodes(int endNodeCount) {
+        GatherWoodTestData testData = new GatherWoodTestData();
 
+        List<G_Action> actionPool = testData.npcWorldState.actionPool;
+        if (endNodeCount == 1) {
+            actionPool.Clear();
+        }
+
+        G_Node goalNode 
+            = new G_Node(actionPool,
+                testData.gatherWood.goalEffects,
+                testData.npcWorldState);
+
+        List<G_Node> nodePool = new List<G_Node>();
+        nodePool.Add(goalNode);
+
+        List<G_Node> tempNodes = goalNode.GenerateChildNodes();
+
+        nodePool.AddRange(tempNodes);
+
+        if (endNodeCount == 5) {
+            tempNodes = nodePool[1].GenerateChildNodes();
+            nodePool.AddRange(tempNodes);
+        }
+
+        Assert.AreEqual(endNodeCount, nodePool.Count);
     }
 
     [TestCase(TestName = "Standard Plan")]
