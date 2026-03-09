@@ -58,10 +58,41 @@ public class NodeTests {
         Assert.AreEqual(testGoalNode, testNode.IsGoalNode);
     }
     
-    [TestCase(TestName = "0 Preconditions met by worldState")]
-    [TestCase(TestName = "Some Preconditions met by worldState")]
-    public void ProcessPreconditons() {
-        
+    [TestCase(1, TestName = "0 Preconditions met by worldState")]
+    [TestCase(2, TestName = "Some Preconditions met by worldState")]
+    [TestCase(3, TestName = "All Preconditions met by worldState")]
+    public void ProcessPreconditons(int preconsMet) {
+        GatherWoodTestData testData = new GatherWoodTestData();
+
+        G_Node goalNode 
+            = new G_Node(testData.npcWorldState.actionPool,
+                testData.gatherWood.goalEffects,
+                testData.npcWorldState);
+
+        goalNode.preconditions[0].Meet(); // forcing it to be met to simulate correct planning
+
+        G_Node normalNode
+            = new G_Node(goalNode,
+                testData.deliverWood,
+                goalNode.HCost,
+                testData.npcWorldState.actionPool,
+                goalNode.preconditions,
+                testData.npcWorldState,
+                false);
+
+        if (preconsMet >= 2) {
+            testData.npcInventoryComponent.AddToInventory(new ItemStack(testData.choppedWood, 10));
+        }
+        if (preconsMet == 3) {
+            G_AtLocation locationState
+                = testData.npcWorldState.states.Find((state) => state.name == testData.atLocation.name) as G_AtLocation;
+
+            locationState.SetValue(testData.woodstock);
+        }
+
+        int unmetPreconCount = normalNode.ProcessPreconditions(normalNode.preconditions, normalNode.WorldStateRef);
+        int assertedRemainingPrecons = 3 - preconsMet;
+        Assert.AreEqual(assertedRemainingPrecons, unmetPreconCount);
     }
 
     [TestCase(TestName = "Closed")]

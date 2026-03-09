@@ -25,6 +25,7 @@ namespace GOAP {
         public List<G_Condition> preconditions = new List<G_Condition>();
 
         G_WorldState worldStateRef;
+        public G_WorldState WorldStateRef { get { return worldStateRef; } }
 
         bool isGoalNode = false;
         public bool IsGoalNode { get { return isGoalNode; } }
@@ -32,13 +33,23 @@ namespace GOAP {
 
         #region Constructors
 
-        // constructor for actions
+        /// <summary>
+        /// Constructor for Actions
+        /// </summary>
+        /// <param name="parentNode"></param>
+        /// <param name="nodeAction"></param>
+        /// <param name="hCost"></param>
+        /// <param name="actionPool"></param>
+        /// <param name="preconditions"></param>
+        /// <param name="worldStateRef"></param>
+        /// <param name="processUnmetPreconditions"></param>
         public G_Node(G_Node parentNode,
             G_Action nodeAction,
             int hCost,
             List<G_Action> actionPool,
             List<G_Condition> preconditions,
-            G_WorldState worldStateRef) {
+            G_WorldState worldStateRef,
+            bool processUnmetPreconditions = true) {
 
             // parent node
             this.parentNode = parentNode;
@@ -64,10 +75,19 @@ namespace GOAP {
                 this.preconditions.Add(G_Condition.Clone(nodeAction.preconditions[i]));
             }
 
-            // determine unmet preconditions
-            this.unmetPreconditions = ProcessPreconditions(this.preconditions, this.worldStateRef);
+            if (processUnmetPreconditions) {
+                // determine unmet preconditions
+                this.unmetPreconditions = ProcessPreconditions(this.preconditions, this.worldStateRef);
+            }
+
         }
 
+        /// <summary>
+        /// Constructor for Goals
+        /// </summary>
+        /// <param name="nodeActionPool"></param>
+        /// <param name="preconditions"></param>
+        /// <param name="worldStateRef"></param>
         public G_Node(List<G_Action> nodeActionPool,
             List<G_Condition> preconditions,
             G_WorldState worldStateRef) {
