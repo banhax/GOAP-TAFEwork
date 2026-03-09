@@ -60,6 +60,10 @@ namespace GOAP {
 
             nodeState = G_NodeState.open;
 
+            for (int i = 0; i < nodeAction.preconditions.Count; i++) {
+                this.preconditions.Add(G_Condition.Clone(nodeAction.preconditions[i]));
+            }
+
             // determine unmet preconditions
             this.unmetPreconditions = ProcessPreconditions(this.preconditions, this.worldStateRef);
         }
@@ -160,9 +164,6 @@ namespace GOAP {
             bool someConditionsMet = action.TestEffectsAgainstPreconditions(clonedPreconditions);
 
             if (someConditionsMet) { // build new node
-                for (int i = 0; i < action.preconditions.Count; i++) {
-                    clonedPreconditions.Add(G_Condition.Clone(action.preconditions[i]));
-                }
                 newNode = new G_Node(this,
                     action,
                     hCost,

@@ -6,6 +6,7 @@ using GOAP;
 
 public class NodeTests {
     // constructors for normal nodes and for goal nodes
+    // :}
 
     // process preconditions test - checking for fulfilled preconditions from the world state
 
@@ -16,7 +17,7 @@ public class NodeTests {
     // return plan - return the whole plan as a list
 
     [TestCase(true, 0, 1, 1, TestName = "Goal  Node")]
-    [TestCase(TestName = "Normal Node")]
+    [TestCase(false, 10, 3, 3, TestName = "Normal Node")]
     public void Constructor(bool testGoalNode,
             int hCost,
             int unmetCount,
@@ -24,10 +25,17 @@ public class NodeTests {
         GatherWoodTestData testData = new GatherWoodTestData();
 
         G_Node goalNode 
-            = new G_Node(testData.npcWorldState.actionPool, testData.gatherWood.goalEffects, testData.npcWorldState);
+            = new G_Node(testData.npcWorldState.actionPool,
+                testData.gatherWood.goalEffects,
+                testData.npcWorldState);
 
         G_Node normalNode
-            = null;
+            = new G_Node(goalNode,
+                testData.deliverWood,
+                goalNode.HCost,
+                testData.npcWorldState.actionPool,
+                goalNode.preconditions,
+                testData.npcWorldState);
 
         G_Node testNode = testGoalNode ? goalNode : normalNode; 
 
@@ -47,7 +55,7 @@ public class NodeTests {
         Assert.AreEqual(preconCount, testNode.preconditions.Count);
 
         Assert.NotNull(testNode.preconditions);
-        Assert.AreEqual(testGoalNode, goalNode.IsGoalNode);
+        Assert.AreEqual(testGoalNode, testNode.IsGoalNode);
     }
     
     [TestCase(TestName = "0 Preconditions met by worldState")]
