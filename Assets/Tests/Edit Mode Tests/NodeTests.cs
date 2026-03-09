@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
@@ -9,6 +10,7 @@ public class NodeTests {
     // :}
 
     // process preconditions test - checking for fulfilled preconditions from the world state
+    // :}
 
     // process node - get the node's planning result
 
@@ -95,11 +97,68 @@ public class NodeTests {
         Assert.AreEqual(assertedRemainingPrecons, unmetPreconCount);
     }
 
-    [TestCase(TestName = "Closed")]
-    [TestCase(TestName = "Success")]
-    [TestCase(TestName = "Failure")]
-    public void ProcessNode() {
+    [TestCase(G_NodeState.closed, TestName = "Closed")]
+    [TestCase(G_NodeState.success, TestName = "Success")]
+    [TestCase(G_NodeState.fail, TestName = "Failure")]
+    public void ProcessNode(G_NodeState targetState) {
+        GatherWoodTestData testData = new GatherWoodTestData();
 
+        G_Node goalNode 
+            = new G_Node(testData.npcWorldState.actionPool,
+            testData.gatherWood.goalEffects,
+            testData.npcWorldState);
+
+        G_Node normalNode = null;
+        G_AtLocation locationState = null;
+
+        switch(targetState) {
+            case G_NodeState.success:
+                goalNode.preconditions[0].Meet();
+                testData.npcInventoryComponent.AddToInventory(new ItemStack(testData.choppedWood, 10));
+                locationState
+                    = testData.npcWorldState.states.Find((state) => state.name == testData.atLocation.name) as G_AtLocation;
+
+                locationState.SetValue(testData.woodstock);
+
+                normalNode
+                    = new G_Node(goalNode,
+                    testData.deliverWood,
+                    goalNode.HCost,
+                    testData.npcWorldState.actionPool,
+                    goalNode.preconditions,
+                    testData.npcWorldState);
+                break;
+
+            case G_NodeState.closed:
+                testData.npcInventoryComponent.AddToInventory(new ItemStack(testData.choppedWood, 10));
+                locationState
+                    = testData.npcWorldState.states.Find((state) => state.name == testData.atLocation.name) as G_AtLocation;
+
+                locationState.SetValue(testData.woodstock);
+
+                normalNode
+                    = new G_Node(goalNode,
+                    testData.deliverWood,
+                    goalNode.HCost,
+                    testData.npcWorldState.actionPool,
+                    goalNode.preconditions,
+                    testData.npcWorldState);
+                break;
+
+            case G_NodeState.fail:
+                normalNode
+                    = new G_Node(goalNode,
+                    testData.deliverWood,
+                    goalNode.HCost,
+                    new List<G_Action>(),
+                    goalNode.preconditions,
+                    testData.npcWorldState);
+                break;
+        }
+
+        normalNode.ProcessNode();
+
+        Assert.AreEqual(targetState, normalNode.NodeState);
     }
 
     [TestCase(TestName = "Generates several nodes")]

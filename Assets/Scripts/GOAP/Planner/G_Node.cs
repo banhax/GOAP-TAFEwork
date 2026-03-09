@@ -46,7 +46,7 @@ namespace GOAP {
         public G_Node(G_Node parentNode,
             G_Action nodeAction,
             int hCost,
-            List<G_Action> actionPool,
+            List<G_Action> nodeActionPool,
             List<G_Condition> preconditions,
             G_WorldState worldStateRef,
             bool processUnmetPreconditions = true) {
@@ -147,7 +147,7 @@ namespace GOAP {
         /// Sets the node state to closed, succes, or fail based on current conditions
         /// </summary>
         /// <param name="nodePool"></param>
-        public void ProcessNode(List<G_Node> nodePool) {
+        public void ProcessNode() {
             if (unmetPreconditions > 0 && nodeActionPool.Count > 0) {
                 nodeState = G_NodeState.closed;
             }

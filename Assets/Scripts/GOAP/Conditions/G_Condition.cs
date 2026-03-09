@@ -99,6 +99,10 @@ namespace GOAP {
             met = true;
         }
 
+        public void UnMeet() {
+            met = false;
+        }
+
         public static G_Condition Clone(G_Condition conditionToClone) {
             return A.Condition().WithState(conditionToClone.state)
             .WithComparison(conditionToClone.comparison)
