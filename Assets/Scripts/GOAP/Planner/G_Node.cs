@@ -57,8 +57,7 @@ namespace GOAP {
             // action
             this.nodeAction = nodeAction;
 
-            // hCost
-            this.hCost = hCost + nodeAction.GetCost();
+            
 
             // action pool
             this.nodeActionPool = new List<G_Action>(nodeActionPool);
@@ -71,8 +70,12 @@ namespace GOAP {
 
             nodeState = G_NodeState.open;
 
-            for (int i = 0; i < nodeAction.preconditions.Count; i++) {
-                this.preconditions.Add(G_Condition.Clone(nodeAction.preconditions[i]));
+            if (nodeAction != null) {
+                // hCost
+                this.hCost = hCost + nodeAction.GetCost();
+                for (int i = 0; i < nodeAction.preconditions.Count; i++) {
+                    this.preconditions.Add(G_Condition.Clone(nodeAction.preconditions[i]));
+                }
             }
 
             if (processUnmetPreconditions) {
@@ -199,16 +202,23 @@ namespace GOAP {
             List<G_Action> plan = new List<G_Action>();
 
             plan = AddToPlan(plan);
+            if (plan != null) {
+                plan.Reverse();
+            }
 
             return plan;
         }
 
         List<G_Action> AddToPlan(List<G_Action> plan) {
             plan.Add(nodeAction);
-            if (parentNode != null && !parentNode.isGoalNode) {
+            if (!parentNode.isGoalNode && parentNode != null && nodeAction != null) {
                 plan = parentNode.AddToPlan(plan);
             }
-            return plan;
+            else if (!isGoalNode && nodeAction == null) {
+                plan = null;
+                Debug.LogWarning($"Node action was null, returning null plan");
+            }
+                return plan;
         }
 
         #endregion
