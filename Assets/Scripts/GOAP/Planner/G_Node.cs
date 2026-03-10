@@ -202,9 +202,6 @@ namespace GOAP {
             List<G_Action> plan = new List<G_Action>();
 
             plan = AddToPlan(plan);
-            if (plan != null) {
-                plan.Reverse();
-            }
 
             return plan;
         }

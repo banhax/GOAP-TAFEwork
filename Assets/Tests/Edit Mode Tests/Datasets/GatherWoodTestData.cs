@@ -243,5 +243,11 @@ namespace GOAP {
             npcWorldState.goals.Add(gatherWood);
             #endregion
         }
+
+        public void AddDataForStandardTest() {
+            workshopInventoryComponent.AddToInventory(new ItemStack(axe, 1));
+            treeInventoryComponent.AddToInventory(new ItemStack(choppedWood, 10));
+            treeInventoryComponent.AddToInventory(new ItemStack(choppedWood, 10));
+        }
     }
 }

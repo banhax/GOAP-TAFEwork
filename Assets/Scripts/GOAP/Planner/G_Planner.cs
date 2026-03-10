@@ -36,7 +36,8 @@ namespace GOAP {
                 else if (currentNode.NodeState == G_NodeState.closed) {
                     nodePool.AddRange(currentNode.GenerateChildNodes());
                     nodePool = SortPool(nodePool);
-                    if (nodePool[0].NodeState == G_NodeState.open) {
+
+                    if (nodePool[0].NodeState != G_NodeState.open) {
                         success = false;
                         break;
                     }

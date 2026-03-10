@@ -267,12 +267,12 @@ public class NodeTests {
             Assert.AreEqual(true, plan != null);
             Assert.AreEqual(6, plan.Count);
 
-            Assert.AreEqual("deliverWood", plan[0].name);
-            Assert.AreEqual("goToWoodStock", plan[1].name);
-            Assert.AreEqual("chopTree", plan[2].name);
-            Assert.AreEqual("goToTree", plan[3].name);
-            Assert.AreEqual("takeAxe", plan[4].name);
-            Assert.AreEqual("goToWorkshop", plan[5].name);
+            Assert.AreEqual("deliverWood", plan[5].name);
+            Assert.AreEqual("goToWoodStock", plan[4].name);
+            Assert.AreEqual("chopTree", plan[3].name);
+            Assert.AreEqual("goToTree", plan[2].name);
+            Assert.AreEqual("takeAxe", plan[1].name);
+            Assert.AreEqual("goToWorkshop", plan[0].name);
         }
         else {
             Assert.AreEqual(true, plan == null);
