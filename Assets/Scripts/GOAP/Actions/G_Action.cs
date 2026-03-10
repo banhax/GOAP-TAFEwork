@@ -9,17 +9,20 @@ namespace GOAP {
         #region Values
 
         internal int cost = 10;
+        int priority = 0;
         public List<G_Condition> preconditions = new List<G_Condition>();
         public List<G_Condition> effects = new List<G_Condition>();
         public void Construct(string name,
             List<G_Condition> preconditions,
             List<G_Condition> effects,
-            int cost = 10) {
+            int cost = 10,
+            int priority = 0) {
 
             this.name = name;
             this.preconditions = preconditions;
             this.effects = effects;
             this.cost = cost;
+            this.priority = priority;
         }
 
         #endregion
@@ -73,6 +76,10 @@ namespace GOAP {
             return cost;
         }
 
+        public virtual int GetPriority() {
+            return priority;
+        }
+
         /// <summary>
         /// Creates a duplicate of this action instance
         /// </summary>
@@ -92,7 +99,8 @@ namespace GOAP {
             clonedAction.Construct(this.name,
                 clonedPreconditions,
                 clonedEffects,
-                this.cost);
+                this.cost,
+                this.priority);
             return clonedAction;
         }
 

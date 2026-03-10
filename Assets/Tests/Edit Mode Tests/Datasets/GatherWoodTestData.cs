@@ -126,7 +126,8 @@ namespace GOAP {
                 .WithEffect(A.Condition().WithState(atLocation)
                     .WithExpectedValue(woodstock))
                 
-                .WithCost(10);
+                .WithCost(10)
+                .WithPriority(1);
 
             chopTree = An.Action("chopTree")
                 .WithPrecondition(A.Condition().WithState(npcInventory)
@@ -148,8 +149,9 @@ namespace GOAP {
             goToTree = An.Action("goToTree")
                 .WithEffect(A.Condition().WithState(atLocation)
                     .WithExpectedValue(tree))
-                
-                .WithCost(10);
+
+                .WithCost(10)
+                .WithPriority(1);
         
             takeAxe = An.Action("takeAxe")
                 .WithPrecondition(A.Condition().WithState(npcInventory)
@@ -173,8 +175,9 @@ namespace GOAP {
             goToWorkshop = An.Action("goToWorkshop")
                 .WithEffect(A.Condition().WithState(atLocation)
                     .WithExpectedValue(workshop))
-                
-                .WithCost(10);
+
+                .WithCost(10)
+                .WithPriority(1);
         
             buyWood = An.Action("buyWood")
                 .WithPrecondition(A.Condition().WithState(npcInventory)
@@ -204,8 +207,9 @@ namespace GOAP {
             goToShop = An.Action("goToShop")
                 .WithEffect(A.Condition().WithState(atLocation)
                     .WithExpectedValue(shop))
-                
-                .WithCost(10);
+
+                .WithCost(10)
+                .WithPriority(1);
             #endregion
 
             #region Goals

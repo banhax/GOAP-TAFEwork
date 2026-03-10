@@ -10,6 +10,7 @@ namespace GOAP {
         List<G_Condition> preconditions = new List<G_Condition>();
         List<G_Condition> effects = new List<G_Condition>();
         int cost = 10;
+        int priority = 0;
 
         public G_ActionBuilder(string name) {
             this.name = name;
@@ -19,6 +20,10 @@ namespace GOAP {
         #region With Functions
         public G_ActionBuilder WithCost(int cost) {
             this.cost = cost;
+            return this;
+        }
+        public G_ActionBuilder WithPriority(int priority) {
+            this.priority = priority;
             return this;
         }
 
@@ -47,7 +52,7 @@ namespace GOAP {
 
         public G_Action Build() {
             G_Action action = ScriptableObject.CreateInstance<G_Action>();
-            action.Construct(name, preconditions, effects, cost);
+            action.Construct(name, preconditions, effects, cost, priority);
             return action;
         }
 
