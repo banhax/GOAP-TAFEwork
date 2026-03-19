@@ -5,15 +5,17 @@ namespace GOAP {
         #region Basic Values
         // any values to be transferred into the build object
         string name = "";
+        //bool isLocal = false;
+        object value = null;
 
-        public BuilderTemplate() {
-
+        public BuilderTemplate(string name) {
+            this.name = name;
         }
         #endregion
 
         #region With Functions
-        public BuilderTemplate WithName(string name) {
-            this.name = name;
+        public BuilderTemplate WithValue(object value) {
+            this.value = value;
             return this;
         }
         #endregion

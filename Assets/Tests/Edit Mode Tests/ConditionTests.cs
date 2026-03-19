@@ -11,7 +11,7 @@ public class ConditionTests
     [TestCase(true, TestName = "Use Parameter State")]
     public void DoesStateMeetCondition(bool useParameter)
     {
-        G_BoolState boolState = A.BoolState().WithName("test").WithValue(true);
+        G_BoolState boolState = A.BoolState("test").WithValue(true);
 
         G_Condition condition = A.Condition()
         .WithState(boolState)
@@ -63,7 +63,7 @@ public class ConditionTests
         bool expectedResult) {
 
         // Arrange
-        G_BoolState boolState = A.BoolState().WithName("test").WithValue(true);
+        G_BoolState boolState = A.BoolState("test").WithValue(true);
         G_Condition preCondition 
             = A.Condition().WithState(boolState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
         G_Condition effect 
@@ -159,7 +159,7 @@ public class ConditionTests
         bool expectedResult) {
 
         // Arrange
-        G_FloatState floatState = A.FloatState().WithName("test").WithValue(5);
+        G_FloatState floatState = A.FloatState("test").WithValue(5);
         G_Condition preCondition
             = A.Condition().WithState(floatState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
         G_Condition effect
@@ -257,7 +257,7 @@ public class ConditionTests
         bool expectedResult) {
 
         // Arrange
-        G_IntState intState = An.IntState().WithName("test").WithValue(5);
+        G_IntState intState = An.IntState("test").WithValue(5);
         G_Condition preCondition
             = A.Condition().WithState(intState).WithComparison(preComparison).WithExpectedValue(preExpectedValue);
         G_Condition effect
@@ -288,7 +288,7 @@ public class ConditionTests
     bool expectedResult) {
 
         LocationType tree = A.LocationType("tree");
-        G_AtLocation atLocation = An.AtLocation().WithName("atLocation").WithLocationType(tree);
+        G_AtLocation atLocation = An.AtLocation("atLocation").WithLocationType(tree);
         LocationType preExpectedValue = null;
         LocationType effectExpectedValue = null;
 

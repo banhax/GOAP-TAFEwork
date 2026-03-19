@@ -10,7 +10,7 @@ public class AtLocationTests
     [Test]
     public void AtLocationClone() {
         LocationType tree = A.LocationType("tree");
-        G_AtLocation atLocation = An.AtLocation().WithName("atLocation").WithLocationType(tree);
+        G_AtLocation atLocation = An.AtLocation("atLocation").WithLocationType(tree);
 
         G_AtLocation clone = atLocation.Clone() as G_AtLocation;
         Assert.AreEqual(atLocation.name, clone.name);
@@ -33,7 +33,7 @@ public class AtLocationTests
             expectedLocation = tree;
         }
 
-        G_AtLocation atLocation = An.AtLocation().WithName("atLocation").WithLocationType(stateLocation);
+        G_AtLocation atLocation = An.AtLocation("atLocation").WithLocationType(stateLocation);
         bool result = atLocation.TestState(atLocation, G_StateComparison.equal, expectedLocation);
         Assert.AreEqual(expectedResult, result);
     }

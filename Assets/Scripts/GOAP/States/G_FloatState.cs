@@ -6,8 +6,9 @@ namespace GOAP {
         float value;
         #region Basic Controls
 
-        public override void Construct(string name, object value) {
+        public override void Construct(string name, object value, bool isLocal) {
             this.name = name;
+            this.isLocal = isLocal;
             SetValue(value);
         }
 
@@ -22,7 +23,7 @@ namespace GOAP {
         }
 
         public override G_State Clone() {
-            return A.FloatState().WithName(name).WithValue(value);
+            return A.FloatState(name).WithValue(value).IsLocal(isLocal);
         }
 
         #endregion

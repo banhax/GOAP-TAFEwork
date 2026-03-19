@@ -2,11 +2,11 @@ using UnityEngine;
 
 namespace GOAP {
     public static class An {
-        public static G_IntStateBuilder IntState() {
-            return new G_IntStateBuilder();
+        public static G_IntStateBuilder IntState(string name) {
+            return new G_IntStateBuilder(name);
         }
-        public static G_AtLocationBuilder AtLocation() {
-            return new G_AtLocationBuilder();
+        public static G_AtLocationBuilder AtLocation(string name) {
+            return new G_AtLocationBuilder(name);
         }
         public static ItemBuilder Item(string name) {
             return new ItemBuilder(name);

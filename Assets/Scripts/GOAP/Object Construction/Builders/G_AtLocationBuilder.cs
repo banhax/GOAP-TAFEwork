@@ -5,20 +5,25 @@ namespace GOAP {
         #region Basic Values
         // any values to be transferred into the build object
         string name = "";
+        bool isLocal = false;
         LocationType value;
 
-        public G_AtLocationBuilder() {
-
+        public G_AtLocationBuilder(string name) {
+            this.name = name;
         }
         #endregion
 
         #region With Functions
-        public G_AtLocationBuilder WithName(string name) {
-            this.name = name;
-            return this;
-        }
+        // public G_AtLocationBuilder WithName(string name) {
+        //     this.name = name;
+        //     return this;
+        // }
         public G_AtLocationBuilder WithLocationType(LocationType value) {
             this.value = value;
+            return this;
+        }
+        public G_AtLocationBuilder IsLocal(bool isLocal) {
+            this.isLocal = isLocal;
             return this;
         }
         #endregion
@@ -27,7 +32,7 @@ namespace GOAP {
 
         public G_AtLocation Build() {
             G_AtLocation state = ScriptableObject.CreateInstance<G_AtLocation>();
-            state.Construct(name, value);
+            state.Construct(name, value, isLocal);
             return state;
         }
 

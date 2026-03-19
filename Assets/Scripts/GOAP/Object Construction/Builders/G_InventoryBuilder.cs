@@ -5,6 +5,7 @@ namespace GOAP {
         #region Basic Values
         // any values to be transferred into the build object
         string name = "";
+        bool isLocal = false;
         Inventory inventory;
 
         public G_InventoryBuilder(string name) {
@@ -13,12 +14,16 @@ namespace GOAP {
         #endregion
 
         #region With Functions
-        public G_InventoryBuilder WithName(string name) {
-            this.name = name;
-            return this;
-        }
+        // public G_InventoryBuilder WithName(string name) {
+        //     this.name = name;
+        //     return this;
+        // }
         public G_InventoryBuilder WithInventory(Inventory inventory) {
             this.inventory = inventory;
+            return this;
+        }
+        public G_InventoryBuilder IsLocal(bool isLocal) {
+            this.isLocal = isLocal;
             return this;
         }
         #endregion
@@ -27,7 +32,7 @@ namespace GOAP {
 
         public G_Inventory Build() {
             G_Inventory inventoryState = ScriptableObject.CreateInstance<G_Inventory>();
-            inventoryState.Construct(name, inventory);
+            inventoryState.Construct(name, inventory, isLocal);
             return inventoryState;
         }
 

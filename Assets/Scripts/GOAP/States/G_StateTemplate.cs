@@ -9,8 +9,9 @@ namespace GOAP {
 
         #region Basic Controls
 
-        public override void Construct(string name, object value) {
+        public override void Construct(string name, object value, bool isLocal) {
             this.name = name;
+            this.isLocal = isLocal;
             SetValue(value);
         }
 
@@ -24,7 +25,7 @@ namespace GOAP {
 
         public override G_State Clone() {
             G_State clone = ScriptableObject.CreateInstance<G_State>();
-            clone.Construct(this.name, this.value);
+            clone.Construct(this.name, this.value, this.isLocal);
             return clone;
         }
 

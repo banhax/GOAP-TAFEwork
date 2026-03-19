@@ -8,7 +8,7 @@ public class FloatStateTests {
 
     [Test]
     public void Clone() {
-        G_FloatState testState = A.FloatState().WithName("test").WithValue(5);
+        G_FloatState testState = A.FloatState("test").WithValue(5);
         G_State cloneState = testState.Clone();
 
         Assert.AreEqual(testState.name, cloneState.name);
@@ -37,7 +37,7 @@ public class FloatStateTests {
 
 
     public void TestState(float stateValue, G_StateComparison comparison, float testValue, bool expectedResult) {
-        G_FloatState testState = A.FloatState().WithName("test").WithValue(stateValue);
+        G_FloatState testState = A.FloatState("test").WithValue(stateValue);
 
         bool result = testState.TestState(testState, comparison, testValue);
         Assert.AreEqual(expectedResult, result);

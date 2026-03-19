@@ -6,11 +6,13 @@ namespace GOAP {
     public class G_State : ScriptableObject {
         // the value we are storing
         object value;
+        public bool isLocal = false;
 
         #region Basic Controls
 
-        public virtual void Construct(string name, object value) {
+        public virtual void Construct(string name, object value, bool isLocal) {
             this.name = name;
+            this.isLocal = isLocal;
             SetValue(value);
         }
 
@@ -24,7 +26,7 @@ namespace GOAP {
 
         public virtual G_State Clone() {
             G_State clone = ScriptableObject.CreateInstance<G_State>();
-            clone.Construct(this.name, this.value);
+            clone.Construct(this.name, this.value, this.isLocal);
             return clone;
         }
 

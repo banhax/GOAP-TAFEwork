@@ -73,9 +73,9 @@ public class ActionTests
             inventoryComponent.AddToInventory(new ItemStack(breadKnife, 1));
 
             // states setup
-            isAble = A.BoolState().WithName("isAble").WithValue(true);
+            isAble = A.BoolState("isAble").WithValue(true);
             inventory = An.InventoryState("inventory").WithInventory(inventoryComponent);
-            atLocation = An.AtLocation().WithName("atLocation");
+            atLocation = An.AtLocation("atLocation");
 
             goToKitchen = An.Action("goToKitchen")
                .WithEffect(A.Condition().WithState(atLocation).WithExpectedValue(kitchen));

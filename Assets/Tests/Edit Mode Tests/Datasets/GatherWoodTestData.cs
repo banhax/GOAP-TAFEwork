@@ -102,7 +102,7 @@ namespace GOAP {
             workshopInventory = An.InventoryState("workshopInventory").WithInventory(workshopInventoryComponent);
             woodStockInventory = An.InventoryState("woodStockInventory").WithInventory(woodstockInventoryComponent);
             shopInventory = An.InventoryState("shopInventory").WithInventory(shopInventoryComponent);
-            atLocation = An.AtLocation().WithName("atLocation").WithLocationType(null);
+            atLocation = An.AtLocation("atLocation").WithLocationType(null);
             #endregion
 
             #region Action Generation
