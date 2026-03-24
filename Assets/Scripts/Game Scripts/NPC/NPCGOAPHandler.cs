@@ -18,6 +18,10 @@ namespace GOAP {
             CreateLocalWorldState();
         }
 
+        public G_WorldState GetLocalWorldState() {
+            return localWorldState;
+        }
+
         public void CreateLocalWorldState() {
             if (worldStateReference != null) {
                 for (int i = 0; i < worldStateReference.states.Count; i++) {

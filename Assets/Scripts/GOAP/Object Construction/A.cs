@@ -13,12 +13,18 @@ namespace GOAP {
         public static G_ConditionBuilder Condition() {
             return new G_ConditionBuilder();
         }
+
         public static G_GoalBuilder Goal(string name) {
             return new G_GoalBuilder(name);
         }
         public static LocationTypeBuilder LocationType(string name) {
             return new LocationTypeBuilder(name);
         }
+
+        public static G_WorldStateBuilder WorldState(string name) {
+            return new G_WorldStateBuilder(name);
+        }
+
         public static G_StateBuilder State(string name) {
             return new G_StateBuilder(name);
         }
