@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GOAP {
 
-    [CreateAssetMenu(fileName = "G_Action", menuName = "Scriptable Objects/G_Action")]
+    [CreateAssetMenu(fileName = "G_Action", menuName = "GOAP/Actions/Base Action")]
     public class G_Action : ScriptableObject {
         #region Values
 

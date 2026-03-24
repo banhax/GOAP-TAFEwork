@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GOAP {
 
-    [CreateAssetMenu(fileName = "G_Goal", menuName = "Scriptable Objects/G_Goal")]
+    [CreateAssetMenu(fileName = "G_Goal", menuName = "GOAP/Goals/Base Goal")]
     public class G_Goal : ScriptableObject {
         public int priority = 0;
 

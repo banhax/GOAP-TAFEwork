@@ -3,22 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace GOAP {
+    [System.Serializable]
     public class G_Condition
     {
         #region Variables
         // the state being tested by the condition
+        [SerializeField]
         G_State state;
         public G_State State {
             get { return state; }
         }
 
         // the actual comparison for the condition
+        [SerializeField]
         G_StateComparison comparison;
         public G_StateComparison Comparison {
             get { return comparison; }
         }
 
         // the value we will be comparing to the current value in the state
+        [SerializeField]
         object expectedValue;
         public object ExpectedValue {
             get { return expectedValue; }
@@ -133,6 +137,12 @@ namespace GOAP {
         bool CanSwitchToLocalState() {
             return state != null && state.isLocal;
         }
+
+        #endregion
+
+        #region Editor
+
+        [SerializeField] bool editorActive = false;
 
         #endregion
     }
