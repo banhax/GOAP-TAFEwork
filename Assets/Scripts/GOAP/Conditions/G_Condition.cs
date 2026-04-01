@@ -22,7 +22,7 @@ namespace GOAP {
         }
 
         // the value we will be comparing to the current value in the state
-        [SerializeField]
+        [SerializeReference]
         object expectedValue;
         public object ExpectedValue {
             get { return expectedValue; }

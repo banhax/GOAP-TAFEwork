@@ -7,7 +7,20 @@ public class G_ConditionEditor : PropertyDrawer { // only one instance of a cust
 
     float height = 0f;
     public override float GetPropertyHeight(SerializedProperty property, GUIContent label) {
-        return (base.GetPropertyHeight(property, label) + EditorGUIUtility.standardVerticalSpacing) * 2;
+        int heightMultiplier = 1;
+
+        SerializedProperty stateProperty = property.FindPropertyRelative("state");
+        SerializedProperty active = property.FindPropertyRelative("editorActive");
+
+        if (stateProperty.objectReferenceValue != null && active.boolValue) {
+            heightMultiplier = (stateProperty.objectReferenceValue as G_State).GetEditorHeight();
+        }
+        else if (stateProperty.objectReferenceValue == null && active.boolValue) {
+            heightMultiplier = 2;
+        }
+
+            return (base.GetPropertyHeight(property, label) 
+                + EditorGUIUtility.standardVerticalSpacing) * heightMultiplier;
     }
 
     public override void OnGUI(Rect position, SerializedProperty property, GUIContent label) {
@@ -40,7 +53,7 @@ public class G_ConditionEditor : PropertyDrawer { // only one instance of a cust
         IncrementHeight(out height, property, label);
 
         if (stateProperty.objectReferenceValue != null) {
-            // build custom editor
+            ((G_State)stateProperty.objectReferenceValue).Editor(this, ref height, position, property, label);
         }
     }
 

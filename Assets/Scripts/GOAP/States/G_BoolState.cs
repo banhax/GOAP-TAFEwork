@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace GOAP {
@@ -137,5 +138,62 @@ namespace GOAP {
         }
 
         #endregion
+
+#if UNITY_EDITOR
+        #region Editor
+
+        public override int GetEditorHeight() {
+            return 3;
+        }
+
+        public override void Editor(G_ConditionEditor propertyDrawer,
+            ref float height,
+            Rect position,
+            SerializedProperty property,
+            GUIContent label) {
+
+            position = propertyDrawer.GetFormattedRect(position, property, label);
+            EditorGUI.BeginChangeCheck();
+
+            SerializedProperty expectedValue = property.FindPropertyRelative("expectedValue");
+            SerializedProperty comparison = property.FindPropertyRelative("comparison");
+
+            if (expectedValue.managedReferenceValue == null
+                || !(expectedValue.managedReferenceValue is bool)) {
+
+                expectedValue.managedReferenceValue = null;
+                expectedValue.managedReferenceValue = false;
+            }
+
+            Rect comparisonRect = new Rect(position.x,
+                position.y,
+                position.width * 0.75f,
+                position.height);
+
+            comparison.enumValueIndex = (int)(G_StateComparison)EditorGUI.EnumPopup(comparisonRect,
+                new GUIContent("is"),
+                (G_StateComparison)comparison.enumValueIndex,
+                (option) => StateSupportsComparison((G_StateComparison)option));
+
+            Rect toggleRect = new Rect(position.x + position.width * 0.75f,
+                position.y,
+                position.width * 0.25f,
+                position.height);
+
+            bool toggleValue = EditorGUI.Toggle(toggleRect, (bool)expectedValue.managedReferenceValue);
+
+            if (toggleValue != (bool)expectedValue.managedReferenceValue) {
+                expectedValue.managedReferenceValue = toggleValue;
+            }
+
+            propertyDrawer.IncrementHeight(out height, property, label);
+;
+            if (EditorGUI.EndChangeCheck()) {
+                property.serializedObject.ApplyModifiedProperties();
+            }
+        }
+
+        #endregion
+#endif
     }
 }
