@@ -9,8 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5caa6a19b2ffc943ace514ed7b00712, type: 3}
-  m_Name: Test Action
-  m_EditorClassIdentifier: NewAssembly::GOAP.G_Action
-  preconditions: []
-  effects: []
+  m_Script: {fileID: 11500000, guid: 28da4233a137f4b34820647ba13c6ef4, type: 3}
+  m_Name: Test Bool State
+  m_EditorClassIdentifier: NewAssembly::GOAP.G_BoolState
+  isLocal: 0
