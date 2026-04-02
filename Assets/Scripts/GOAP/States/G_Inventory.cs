@@ -1,9 +1,10 @@
 using GOAP;
 using System;
+using UnityEditor;
 using UnityEngine;
 
 namespace GOAP {
-
+    [CreateAssetMenu(fileName = "New Inventory State", menuName = "GOAP/States/Inventory State")]
     public class G_Inventory : G_State   {
         // the value we are storing
         Inventory value;
@@ -126,5 +127,80 @@ namespace GOAP {
         }
 
         #endregion
+
+#if UNITY_EDITOR
+        #region Editor
+
+        public override int GetEditorHeight() {
+            return 3;
+        }
+
+        public override void Editor(G_ConditionEditor propertyDrawer,
+            ref float height,
+            Rect position,
+            SerializedProperty property,
+            GUIContent label) {
+
+            position = propertyDrawer.GetFormattedRect(position, property, label);
+            EditorGUI.BeginChangeCheck();
+
+            SerializedProperty expectedValue = property.FindPropertyRelative("expectedValue");
+            SerializedProperty comparison = property.FindPropertyRelative("comparison");
+
+            if (expectedValue.managedReferenceValue == null
+                || !(expectedValue.managedReferenceValue is ItemStack)) {
+
+                expectedValue.managedReferenceValue = null;
+                expectedValue.managedReferenceValue = new ItemStack();
+                property.FindPropertyRelative("expectedReference").objectReferenceValue = null;
+                property.FindPropertyRelative("useExpectedReference").boolValue = true;
+            }
+
+            SerializedProperty item = expectedValue.FindPropertyRelative("item");
+            SerializedProperty quantity = expectedValue.FindPropertyRelative("quantity");
+
+            Rect labelRect = new Rect(position.x,
+                position.y,
+                position.width * 0.15f,
+                position.height);
+
+            Rect comparisonRect = new Rect(position.x + position.width * 0.15f,
+                position.y,
+                position.width * 0.35f,
+                position.height);
+
+            Rect intFieldRect = new Rect(position.x + position.width * 0.475f,
+                position.y,
+                position.width * 0.15f,
+                position.height);
+
+            Rect objectFieldRect = new Rect(position.x + position.width * 0.6f,
+                position.y,
+                position.width * 0.4f,
+                position.height);
+
+            EditorGUI.LabelField(labelRect, new GUIContent("has"));
+
+            comparison.enumValueIndex = (int)(G_StateComparison)EditorGUI.EnumPopup(comparisonRect,
+                new GUIContent(""),
+                (G_StateComparison)comparison.enumValueIndex,
+                (option) => StateSupportsComparison((G_StateComparison)option));
+
+            quantity.intValue = EditorGUI.IntField(intFieldRect, quantity.intValue);
+
+            item.objectReferenceValue = EditorGUI.ObjectField(objectFieldRect,
+                (Item)item.objectReferenceValue,
+                typeof(Item),
+                false);
+
+            propertyDrawer.IncrementHeight(out height, property, label);
+            ;
+            if (EditorGUI.EndChangeCheck()) {
+                property.serializedObject.ApplyModifiedProperties();
+            }
+        }
+
+        #endregion
+#endif
     }
 }
