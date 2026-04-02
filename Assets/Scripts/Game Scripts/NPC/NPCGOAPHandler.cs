@@ -12,9 +12,14 @@ namespace GOAP {
         [SerializeField] List<G_Action> localActions = new List<G_Action>();
         [SerializeField] List<G_Goal> localGoals = new List<G_Goal>();
 
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Awake()
-        {
+        MapInjector mapInjector = new MapInjector();
+        Map map;
+
+        private void Awake() {
+            map = mapInjector.FindAndInjectObject(transform.position, this);
+        }
+
+        void Start() {
             CreateLocalWorldState();
         }
 
