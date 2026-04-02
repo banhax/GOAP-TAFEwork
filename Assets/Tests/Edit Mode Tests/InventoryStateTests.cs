@@ -52,7 +52,7 @@ public class InventoryStateTests
             expectedValue = new ItemStack(testItem, expectedQuantity);
         }
 
-        bool result = testState.TestState(testState, G_StateComparison.equal, expectedValue);
+        bool result = testState.TestState(testState, G_StateComparison.EqualTo, expectedValue);
 
         Assert.AreEqual(expectedResult, result);
     }

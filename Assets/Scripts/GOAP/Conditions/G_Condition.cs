@@ -58,7 +58,7 @@ namespace GOAP {
             object expectedValue,
             Object expectedReference,
             bool useExpectedReference,
-            G_StateComparison comparison = G_StateComparison.equal,
+            G_StateComparison comparison = G_StateComparison.EqualTo,
             bool met = false) {
 
             this.state = state;
@@ -157,7 +157,7 @@ namespace GOAP {
         }
 
         public static G_Condition Clone(G_Condition conditionToClone) {
-            return A.Condition().WithState(conditionToClone.state)
+            return A.Condition().State(conditionToClone.state)
             .WithComparison(conditionToClone.comparison)
             .WithExpectedValue(conditionToClone.expectedValue)
             .WithExpectedReference(conditionToClone.expectedReference, conditionToClone.useExpectedReference)
@@ -181,10 +181,36 @@ namespace GOAP {
 
         #endregion
 
+#if UNITY_EDITOR
         #region Editor
+        
+        public void ClearExpectedValue() {
+            expectedValue = null;
+        }
 
         [SerializeField] bool editorActive = false;
 
+        public static void ValidateReferenceConditions(List<G_Condition> conditions, out int trackerCount) {
+            List<object> compareValues = new List<object>();
+
+            for (int i = 0; i < conditions.Count; i++) {
+                ValidatePrecondition(conditions[i], compareValues);
+            }
+            trackerCount = conditions.Count;
+        }
+
+        static void ValidatePrecondition(G_Condition condition, List<object> compareValues) {
+            if (condition.State != null && condition.State.NeedsEditorValidation()) {
+                if(compareValues.Contains(condition.ExpectedValue)) {
+                    condition.ClearExpectedValue();
+                }
+                else {
+                    compareValues.Add(condition.ExpectedValue);
+                }
+            }
+        }
+
         #endregion
+#endif
     }
 }

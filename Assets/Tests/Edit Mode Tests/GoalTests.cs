@@ -10,12 +10,10 @@ public class GoalTests {
         ActionTests.SlicedBreadData breadData = new ActionTests.SlicedBreadData();
 
         G_Goal sliceBread = A.Goal("sliceBread")
-            .WithTrigger(A.Condition().WithState(breadData.inventory)
-                .WithComparison(G_StateComparison.equal)
-                .WithExpectedValue(ItemStack.EmptyStack(breadData.slicedBread)))
-            .WithEffect(A.Condition().WithState(breadData.inventory)
-                .WithComparison(G_StateComparison.greater)
-                .WithExpectedValue(ItemStack.EmptyStack(breadData.slicedBread)))
+            .WithTrigger(A.Condition().State(breadData.inventory).IsEqualTo(ItemStack.EmptyStack(breadData.slicedBread)))
+
+            .WithEffect(A.Condition().State(breadData.inventory).IsGreaterThan(ItemStack.EmptyStack(breadData.slicedBread)))
+
             .WithPriority(0);
 
         G_Goal clone = sliceBread.Clone();

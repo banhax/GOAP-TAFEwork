@@ -9,19 +9,19 @@ public static class G_NumberConditionComparer
         bool result = false;
 
         switch (comparison) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 result = (stateValue == expectedValue);
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 result = (stateValue > expectedValue);
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 result = (stateValue >= expectedValue);
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 result = (stateValue < expectedValue);
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 result = (stateValue <= expectedValue);
                 break;
         }
@@ -33,19 +33,19 @@ public static class G_NumberConditionComparer
         bool result = false;
 
         switch (comparison) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 result = (stateValue == expectedValue);
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 result = (stateValue > expectedValue);
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 result = (stateValue >= expectedValue);
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 result = (stateValue < expectedValue);
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 result = (stateValue <= expectedValue);
                 break;
         }
@@ -66,19 +66,19 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (preCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = TestEqual(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = TestGreater(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = TestGreaterOrEqual(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = TestLesser(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = TestLesserOrEqual(preValue, effectValue, effectCompare);
                 break;
             default:
@@ -97,19 +97,19 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (preCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = TestEqual(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = TestGreater(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = TestGreaterOrEqual(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = TestLesser(preValue, effectValue, effectCompare);
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = TestLesserOrEqual(preValue, effectValue, effectCompare);
                 break;
             default:
@@ -124,11 +124,11 @@ public static class G_NumberConditionComparer
 
     #region Test Equal
     static bool TestEqual(float preValue, float effectValue, G_StateComparison effectCompare) {
-        return effectCompare == G_StateComparison.equal
+        return effectCompare == G_StateComparison.EqualTo
             && preValue == effectValue;
     }
     static bool TestEqual(int preValue, int effectValue, G_StateComparison effectCompare) {
-        return effectCompare == G_StateComparison.equal
+        return effectCompare == G_StateComparison.EqualTo
             && preValue == effectValue;
     }
     #endregion
@@ -138,13 +138,13 @@ public static class G_NumberConditionComparer
         bool success = false;
         
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue > preValue;
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = effectValue >= preValue;
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = effectValue > preValue;
                 break;
         }
@@ -156,13 +156,13 @@ public static class G_NumberConditionComparer
         bool success = false;
         
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue > preValue;
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = effectValue >= preValue;
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = effectValue > preValue;
                 break;
         }
@@ -176,13 +176,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue < preValue;
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = effectValue <= preValue;
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = effectValue < preValue;
                 break;
         }
@@ -194,13 +194,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue < preValue;
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = effectValue <= preValue;
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = effectValue < preValue;
                 break;
         }
@@ -214,13 +214,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue >= preValue;
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = effectValue >= preValue;
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = effectValue >= preValue;
                 break;
         }
@@ -231,13 +231,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue >= preValue;
                 break;
-            case G_StateComparison.greater:
+            case G_StateComparison.GreaterThan:
                 success = effectValue >= preValue - 1;
                 break;
-            case G_StateComparison.greater_or_equal:
+            case G_StateComparison.GreaterThanOrEqualTo:
                 success = effectValue >= preValue;
                 break;
         }
@@ -251,13 +251,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue <= preValue;
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = effectValue <= preValue;
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = effectValue <= preValue;
                 break;
         }
@@ -269,13 +269,13 @@ public static class G_NumberConditionComparer
         bool success = false;
 
         switch (effectCompare) {
-            case G_StateComparison.equal:
+            case G_StateComparison.EqualTo:
                 success = effectValue <= preValue;
                 break;
-            case G_StateComparison.lesser:
+            case G_StateComparison.LessThan:
                 success = effectValue <= preValue + 1;
                 break;
-            case G_StateComparison.lesser_or_equal:
+            case G_StateComparison.LessThanOrEqualTo:
                 success = effectValue <= preValue;
                 break;
         }

@@ -48,5 +48,24 @@ namespace GOAP {
                 this.priority);
             return clonedGoal;
         }
+
+#if UNITY_EDITOR
+        #region Editor
+
+        int triggerCount = 0;
+        int effectCount = 0;
+
+        private void OnValidate() { // only runs in the editor
+            if (triggerConditions.Count != triggerCount) {
+                G_Condition.ValidateReferenceConditions(triggerConditions, out triggerCount);
+            }
+
+            if (goalEffects.Count != effectCount) {
+                G_Condition.ValidateReferenceConditions(goalEffects, out effectCount);
+            }
+        }
+
+        #endregion
+#endif
     }
 }

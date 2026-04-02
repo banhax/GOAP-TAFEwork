@@ -92,6 +92,10 @@ namespace GOAP {
             return 3;
         }
 
+        public virtual bool NeedsEditorValidation() {
+            return false;
+        }
+
         public virtual void Editor(G_ConditionEditor propertyDrawer,
             ref float height,
             Rect position,

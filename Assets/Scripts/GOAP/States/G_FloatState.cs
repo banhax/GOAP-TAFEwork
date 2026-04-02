@@ -56,7 +56,7 @@ namespace GOAP {
         /// <param name="comparison"></param>
         /// <returns></returns>
         public override bool StateSupportsComparison(G_StateComparison comparison) {
-            return comparison != G_StateComparison.not_equal;
+            return comparison != G_StateComparison.NotEqualTo;
         }
 
         /// <summary>

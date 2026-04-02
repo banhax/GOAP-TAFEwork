@@ -34,7 +34,7 @@ public class AtLocationTests
         }
 
         G_AtLocation atLocation = An.AtLocation("atLocation").WithLocationType(stateLocation);
-        bool result = atLocation.TestState(atLocation, G_StateComparison.equal, expectedLocation);
+        bool result = atLocation.TestState(atLocation, G_StateComparison.EqualTo, expectedLocation);
         Assert.AreEqual(expectedResult, result);
     }
 }

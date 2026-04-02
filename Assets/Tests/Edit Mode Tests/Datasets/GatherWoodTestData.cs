@@ -106,123 +106,90 @@ namespace GOAP {
             #endregion
 
             #region Action Generation
-            deliverWood = An.Action("deliverWood")
-                .WithPrecondition(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater_or_equal)
-                    .WithExpectedValue(new ItemStack(choppedWood, 10)))
-                .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(woodstock))
 
-                .WithEffect(A.Condition().WithState(woodStockInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(new ItemStack(choppedWood, woodStockMax)))
-                .WithEffect(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
+            deliverWood = An.Action("deliverWood")
+                .WithPrecondition(A.Condition().State(npcInventory).IsGreaterThanOrEqualTo(new ItemStack(choppedWood, 10)))
+
+                .WithPrecondition(A.Condition().State(atLocation).IsEqualTo(woodstock))
+
+                .WithEffect(A.Condition().State(woodStockInventory).IsEqualTo(new ItemStack(choppedWood, woodStockMax)))
+                .WithEffect(A.Condition().State(npcInventory).IsEqualTo(ItemStack.EmptyStack(choppedWood)))
                 
                 .WithCost(10);
             
+
             goToWoodStock = An.Action("goToWoodStock")
-                .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(woodstock))
+                .WithEffect(A.Condition().State(atLocation).IsEqualTo(woodstock))
                 
                 .WithCost(10)
                 .WithPriority(1);
 
+
             chopTree = An.Action("chopTree")
-                .WithPrecondition(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater)
-                    .WithExpectedValue(ItemStack.EmptyStack(axe)))
+                .WithPrecondition(A.Condition().State(npcInventory).IsGreaterThan(ItemStack.EmptyStack(axe)))
 
-                .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(tree))
+                .WithPrecondition(A.Condition().State(atLocation).IsEqualTo(tree))
 
-                .WithEffect(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater_or_equal)
-                    .WithExpectedValue(new ItemStack(choppedWood, 10)))
-                .WithEffect(A.Condition().WithState(treeInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
+                .WithEffect(A.Condition().State(npcInventory).IsGreaterThanOrEqualTo(new ItemStack(choppedWood, 10)))
+                .WithEffect(A.Condition().State(treeInventory).IsEqualTo(ItemStack.EmptyStack(choppedWood)))
 
                 .WithCost(10);
+
 
             goToTree = An.Action("goToTree")
-                .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(tree))
+                .WithEffect(A.Condition().State(atLocation).IsEqualTo(tree))
 
                 .WithCost(10)
                 .WithPriority(1);
         
-            takeAxe = An.Action("takeAxe")
-                .WithPrecondition(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(axe)))
-                .WithPrecondition(A.Condition().WithState(workshopInventory)
-                    .WithComparison(G_StateComparison.greater)
-                    .WithExpectedValue(ItemStack.EmptyStack(axe)))
-                .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(workshop))
 
-                .WithEffect(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater)
-                    .WithExpectedValue(ItemStack.EmptyStack(axe)))
-                .WithEffect(A.Condition().WithState(workshopInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(axe)))
+            takeAxe = An.Action("takeAxe")
+                .WithPrecondition(A.Condition().State(npcInventory).IsEqualTo(ItemStack.EmptyStack(axe)))
+                .WithPrecondition(A.Condition().State(workshopInventory).IsGreaterThan(ItemStack.EmptyStack(axe)))
+                .WithPrecondition(A.Condition().State(atLocation).IsEqualTo(workshop))
+
+                .WithEffect(A.Condition().State(npcInventory).IsGreaterThan(ItemStack.EmptyStack(axe)))
+                .WithEffect(A.Condition().State(workshopInventory).IsEqualTo(ItemStack.EmptyStack(axe)))
 
                 .WithCost(10);
+
 
             goToWorkshop = An.Action("goToWorkshop")
-                .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(workshop))
+                .WithEffect(A.Condition().State(atLocation).IsEqualTo(workshop))
 
                 .WithCost(10)
                 .WithPriority(1);
         
-            buyWood = An.Action("buyWood")
-                .WithPrecondition(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
-                .WithPrecondition(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater_or_equal)
-                    .WithExpectedValue(new ItemStack(money, 1)))
-                .WithPrecondition(A.Condition().WithState(shopInventory)
-                    .WithComparison(G_StateComparison.greater)
-                    .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
-                .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(shop))
 
-                .WithEffect(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.greater_or_equal)
-                    .WithExpectedValue(new ItemStack(choppedWood, 10)))
-                .WithEffect(A.Condition().WithState(npcInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(money)))
-                .WithEffect(A.Condition().WithState(shopInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
+            buyWood = An.Action("buyWood")
+                .WithPrecondition(A.Condition().State(npcInventory).IsEqualTo(ItemStack.EmptyStack(choppedWood)))
+                .WithPrecondition(A.Condition().State(npcInventory).IsGreaterThanOrEqualTo(new ItemStack(money, 1)))
+                .WithPrecondition(A.Condition().State(shopInventory).IsGreaterThan(ItemStack.EmptyStack(choppedWood)))
+                .WithPrecondition(A.Condition().State(atLocation).IsEqualTo(shop))
+
+                .WithEffect(A.Condition().State(npcInventory).IsGreaterThanOrEqualTo(new ItemStack(choppedWood, 10)))
+                .WithEffect(A.Condition().State(npcInventory).IsEqualTo(ItemStack.EmptyStack(money)))
+                .WithEffect(A.Condition().State(shopInventory).IsEqualTo(ItemStack.EmptyStack(choppedWood)))
 
                 .WithCost(10);
 
+
             goToShop = An.Action("goToShop")
-                .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedReference(shop))
+                .WithEffect(A.Condition().State(atLocation).IsEqualTo(shop))
 
                 .WithCost(10)
                 .WithPriority(1);
+
             #endregion
 
             #region Goals
-            gatherWood = A.Goal("gatherWood")
-                .WithTrigger(A.Condition().WithState(woodStockInventory)
-                    .WithComparison(G_StateComparison.lesser)
-                    .WithExpectedValue(new ItemStack(choppedWood, woodStockMax)))
 
-                .WithEffect(A.Condition().WithState(woodStockInventory)
-                    .WithComparison(G_StateComparison.equal)
-                    .WithExpectedValue(new ItemStack(choppedWood, woodStockMax)))
-                
+            gatherWood = A.Goal("gatherWood")
+                .WithTrigger(A.Condition().State(woodStockInventory).IsLessThan(new ItemStack(choppedWood, woodStockMax)))
+                .WithEffect(A.Condition().State(woodStockInventory).IsEqualTo(new ItemStack(choppedWood, woodStockMax)))
+
                 .WithPriority(1);
+
             #endregion
 
             #region World State

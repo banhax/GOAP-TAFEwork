@@ -142,5 +142,24 @@ namespace GOAP {
         }
 
         #endregion
+
+#if UNITY_EDITOR
+        #region Editor
+
+        int preconCount = 0;
+        int effectCount = 0;
+
+        private void OnValidate() { // only runs in the editor
+            if (preconditions.Count != preconCount) {
+                G_Condition.ValidateReferenceConditions(preconditions, out preconCount);
+            }
+
+            if (effects.Count != effectCount) {
+                G_Condition.ValidateReferenceConditions(effects, out effectCount);
+            }
+        }
+
+        #endregion
+#endif
     }
 }

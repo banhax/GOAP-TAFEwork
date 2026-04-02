@@ -92,20 +92,15 @@ public class ActionTests
             atLocation = An.AtLocation("atLocation");
 
             goToKitchen = An.Action("goToKitchen")
-               .WithEffect(A.Condition().WithState(atLocation).WithExpectedReference(kitchen));
+               .WithEffect(A.Condition().State(atLocation).IsEqualTo(kitchen));
 
             sliceBread = An.Action("sliceBread")
-                .WithPrecondition(A.Condition()
-                .WithState(inventory).WithComparison(G_StateComparison.greater).WithExpectedValue(ItemStack.EmptyStack(breadKnife)))
-                .WithPrecondition(A.Condition()
-                .WithState(inventory).WithComparison(G_StateComparison.greater).WithExpectedValue(ItemStack.EmptyStack(bread)))
-                .WithPrecondition(A.Condition()
-                .WithState(atLocation).WithExpectedReference(kitchen))
-                .WithPrecondition(A.Condition()
-                .WithState(isAble).WithExpectedValue(true))
+                .WithPrecondition(A.Condition().State(inventory).IsGreaterThan(ItemStack.EmptyStack(breadKnife)))
+                .WithPrecondition(A.Condition().State(inventory).IsGreaterThan(ItemStack.EmptyStack(bread)))
+                .WithPrecondition(A.Condition().State(atLocation).IsEqualTo(kitchen))
+                .WithPrecondition(A.Condition().State(isAble).IsEqualTo(true))
 
-                .WithEffect(A.Condition()
-                .WithState(inventory).WithComparison(G_StateComparison.greater).WithExpectedValue(ItemStack.EmptyStack(slicedBread)));
+                .WithEffect(A.Condition().State(inventory).IsGreaterThan(ItemStack.EmptyStack(slicedBread)));
         }
     }
 }

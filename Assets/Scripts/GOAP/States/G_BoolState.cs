@@ -58,8 +58,8 @@ namespace GOAP {
         /// <param name="comparison"></param>
         /// <returns></returns>
         public override bool StateSupportsComparison(G_StateComparison comparison) {
-            return comparison == G_StateComparison.equal
-                || comparison == G_StateComparison.not_equal;
+            return comparison == G_StateComparison.EqualTo
+                || comparison == G_StateComparison.NotEqualTo;
         }
 
         /// <summary>
@@ -75,10 +75,10 @@ namespace GOAP {
             bool testValue = (bool)expectedValue;
             bool result = false;
 
-            if (comparison == G_StateComparison.equal) {
+            if (comparison == G_StateComparison.EqualTo) {
                 result = stateValue == testValue;
             }
-            else if (comparison == G_StateComparison.not_equal) {
+            else if (comparison == G_StateComparison.NotEqualTo) {
                 result = stateValue != testValue;
             }
             else {

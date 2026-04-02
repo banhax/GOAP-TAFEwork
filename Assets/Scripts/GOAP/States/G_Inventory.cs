@@ -87,11 +87,11 @@ namespace GOAP {
          
 
         public override bool StateSupportsComparison(G_StateComparison comparison) {
-            return comparison == G_StateComparison.equal
-                || comparison == G_StateComparison.greater
-                || comparison == G_StateComparison.lesser
-                || comparison == G_StateComparison.greater_or_equal
-                || comparison == G_StateComparison.lesser_or_equal;
+            return comparison == G_StateComparison.EqualTo
+                || comparison == G_StateComparison.GreaterThan
+                || comparison == G_StateComparison.LessThan
+                || comparison == G_StateComparison.GreaterThanOrEqualTo
+                || comparison == G_StateComparison.LessThanOrEqualTo;
         }
 
 
@@ -111,7 +111,7 @@ namespace GOAP {
 
         bool NullStackIsEqualToZero(ItemStack inventoryStack, G_StateComparison comparison, ItemStack expectedStack) {
             return inventoryStack == null
-                && comparison == G_StateComparison.equal
+                && comparison == G_StateComparison.EqualTo
                 && expectedStack.quantity == 0;
         }
 
@@ -133,6 +133,10 @@ namespace GOAP {
 
         public override int GetEditorHeight() {
             return 3;
+        }
+
+        public override bool NeedsEditorValidation() {
+            return true;
         }
 
         public override void Editor(G_ConditionEditor propertyDrawer,

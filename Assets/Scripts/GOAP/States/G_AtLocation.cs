@@ -78,7 +78,7 @@ namespace GOAP {
         /// <param name="comparison"></param>
         /// <returns></returns>
         public override bool StateSupportsComparison(G_StateComparison comparison) {
-            return comparison == G_StateComparison.equal;
+            return comparison == G_StateComparison.EqualTo;
         }
 
         /// <summary>
@@ -143,8 +143,8 @@ namespace GOAP {
                 property.FindPropertyRelative("useExpectedReference").boolValue = true;
                 property.FindPropertyRelative("serializedExpectedValue").stringValue = "";
             }
-            if (comparison.enumValueIndex != (int)G_StateComparison.equal) {
-                comparison.enumValueIndex = (int)G_StateComparison.equal;
+            if (comparison.enumValueIndex != (int)G_StateComparison.EqualTo) {
+                comparison.enumValueIndex = (int)G_StateComparison.EqualTo;
             }
 
             //Rect objectFieldRect = new Rect(position.x + position.width * 0.75f,
