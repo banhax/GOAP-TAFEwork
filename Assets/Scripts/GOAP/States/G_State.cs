@@ -31,6 +31,10 @@ namespace GOAP {
             return clone;
         }
 
+        public virtual object ConvertSerializedStringToValue(string serializedString) {
+            return null;
+        }
+
         #endregion
 
         #region Testing Controls

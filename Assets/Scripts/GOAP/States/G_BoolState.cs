@@ -29,6 +29,16 @@ namespace GOAP {
             return A.BoolState(name).WithValue(value).IsLocal(isLocal);
         }
 
+        public override object ConvertSerializedStringToValue(string serializedString) {
+            char type = serializedString[0];
+            if (type == 'b') {
+                return bool.Parse(serializedString.Substring(1));
+            }
+            else {
+                return null;
+            }
+        }
+
         #endregion
 
         #region Testing Controls
@@ -163,6 +173,7 @@ namespace GOAP {
 
                 expectedValue.managedReferenceValue = null;
                 expectedValue.managedReferenceValue = false;
+                property.FindPropertyRelative("serializedExpectedValue").stringValue = "b" + false.ToString();
                 property.FindPropertyRelative("expectedReference").objectReferenceValue = null;
                 property.FindPropertyRelative("useExpectedReference").boolValue = true;
             }
@@ -186,6 +197,7 @@ namespace GOAP {
 
             if (toggleValue != (bool)expectedValue.managedReferenceValue) {
                 expectedValue.managedReferenceValue = toggleValue;
+                property.FindPropertyRelative("serializedExpectedValue").stringValue = "b" + toggleValue.ToString();
             }
 
             propertyDrawer.IncrementHeight(out height, property, label);

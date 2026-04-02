@@ -152,6 +152,7 @@ namespace GOAP {
 
                 expectedValue.managedReferenceValue = null;
                 expectedValue.managedReferenceValue = new ItemStack();
+                property.FindPropertyRelative("serializedExpectedValue").stringValue = "";
                 property.FindPropertyRelative("expectedReference").objectReferenceValue = null;
                 property.FindPropertyRelative("useExpectedReference").boolValue = true;
             }

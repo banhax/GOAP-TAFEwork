@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GOAP {
     [System.Serializable]
-    public class G_Condition
+    public class G_Condition : ISerializationCallbackReceiver
     {
         #region Variables
         // the state being tested by the condition
@@ -47,6 +47,10 @@ namespace GOAP {
         public bool Met {
             get { return met; }
         }
+
+        [SerializeField]
+        [HideInInspector]
+        string serializedExpectedValue = "";
 
         #endregion
 
@@ -166,6 +170,13 @@ namespace GOAP {
 
         bool CanSwitchToLocalState() {
             return state != null && state.isLocal;
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize(){}
+        void ISerializationCallbackReceiver.OnAfterDeserialize() {
+            if (serializedExpectedValue.Length > 0 && state != null) {
+                expectedValue = state.ConvertSerializedStringToValue(serializedExpectedValue);
+            }
         }
 
         #endregion
