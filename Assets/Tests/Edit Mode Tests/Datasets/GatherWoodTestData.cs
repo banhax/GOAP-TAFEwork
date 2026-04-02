@@ -111,7 +111,7 @@ namespace GOAP {
                     .WithComparison(G_StateComparison.greater_or_equal)
                     .WithExpectedValue(new ItemStack(choppedWood, 10)))
                 .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(woodstock))
+                    .WithExpectedReference(woodstock))
 
                 .WithEffect(A.Condition().WithState(woodStockInventory)
                     .WithComparison(G_StateComparison.equal)
@@ -124,7 +124,7 @@ namespace GOAP {
             
             goToWoodStock = An.Action("goToWoodStock")
                 .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(woodstock))
+                    .WithExpectedReference(woodstock))
                 
                 .WithCost(10)
                 .WithPriority(1);
@@ -135,7 +135,7 @@ namespace GOAP {
                     .WithExpectedValue(ItemStack.EmptyStack(axe)))
 
                 .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(tree))
+                    .WithExpectedReference(tree))
 
                 .WithEffect(A.Condition().WithState(npcInventory)
                     .WithComparison(G_StateComparison.greater_or_equal)
@@ -148,7 +148,7 @@ namespace GOAP {
 
             goToTree = An.Action("goToTree")
                 .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(tree))
+                    .WithExpectedReference(tree))
 
                 .WithCost(10)
                 .WithPriority(1);
@@ -161,7 +161,7 @@ namespace GOAP {
                     .WithComparison(G_StateComparison.greater)
                     .WithExpectedValue(ItemStack.EmptyStack(axe)))
                 .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(workshop))
+                    .WithExpectedReference(workshop))
 
                 .WithEffect(A.Condition().WithState(npcInventory)
                     .WithComparison(G_StateComparison.greater)
@@ -174,7 +174,7 @@ namespace GOAP {
 
             goToWorkshop = An.Action("goToWorkshop")
                 .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(workshop))
+                    .WithExpectedReference(workshop))
 
                 .WithCost(10)
                 .WithPriority(1);
@@ -190,7 +190,7 @@ namespace GOAP {
                     .WithComparison(G_StateComparison.greater)
                     .WithExpectedValue(ItemStack.EmptyStack(choppedWood)))
                 .WithPrecondition(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(shop))
+                    .WithExpectedReference(shop))
 
                 .WithEffect(A.Condition().WithState(npcInventory)
                     .WithComparison(G_StateComparison.greater_or_equal)
@@ -206,7 +206,7 @@ namespace GOAP {
 
             goToShop = An.Action("goToShop")
                 .WithEffect(A.Condition().WithState(atLocation)
-                    .WithExpectedValue(shop))
+                    .WithExpectedReference(shop))
 
                 .WithCost(10)
                 .WithPriority(1);

@@ -30,7 +30,14 @@ public class GoalTests {
         for (int i = 0; i < sliceBread.triggerConditions.Count; i++) {
             Assert.AreEqual(sliceBread.triggerConditions[i].State, clone.triggerConditions[i].State);
             Assert.AreEqual(sliceBread.triggerConditions[i].Comparison, clone.triggerConditions[i].Comparison);
-            Assert.AreEqual(sliceBread.triggerConditions[i].ExpectedValue, clone.triggerConditions[i].ExpectedValue);
+            Assert.AreEqual(sliceBread.triggerConditions[i].UseExpectedReference, clone.triggerConditions[i].UseExpectedReference);
+
+            if (sliceBread.triggerConditions[i].UseExpectedReference) {
+                Assert.AreEqual(sliceBread.triggerConditions[i].ExpectedReference, clone.triggerConditions[i].ExpectedReference);
+            }
+            else {
+                Assert.AreEqual(sliceBread.triggerConditions[i].ExpectedValue, clone.triggerConditions[i].ExpectedValue);
+            }
         }
 
         Assert.AreEqual(true, sliceBread.goalEffects.Count > 0);
@@ -39,7 +46,14 @@ public class GoalTests {
         for (int i = 1; i < sliceBread.goalEffects.Count; i++) {
             Assert.AreEqual(sliceBread.goalEffects[i].State, clone.goalEffects[i].State);
             Assert.AreEqual(sliceBread.goalEffects[i].Comparison, clone.goalEffects[i].Comparison);
-            Assert.AreEqual(sliceBread.goalEffects[i].ExpectedValue, clone.goalEffects[i].ExpectedValue);
+            Assert.AreEqual(sliceBread.goalEffects[i].UseExpectedReference, clone.goalEffects[i].UseExpectedReference);
+
+            if (sliceBread.goalEffects[i].UseExpectedReference) {
+                Assert.AreEqual(sliceBread.goalEffects[i].ExpectedReference, clone.goalEffects[i].ExpectedReference);
+            }
+            else {
+                Assert.AreEqual(sliceBread.goalEffects[i].ExpectedValue, clone.goalEffects[i].ExpectedValue);
+            }
         }
 
         Assert.AreEqual(sliceBread.priority, clone.priority);

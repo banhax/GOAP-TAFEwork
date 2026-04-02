@@ -110,6 +110,8 @@ namespace GOAP {
 
                 expectedValue.managedReferenceValue = null;
                 expectedValue.managedReferenceValue = 0;
+                property.FindPropertyRelative("expectedReference").objectReferenceValue = null;
+                property.FindPropertyRelative("useExpectedReference").boolValue = true;
             }
 
             Rect comparisonRect = new Rect(position.x,

@@ -300,9 +300,9 @@ public class ConditionTests
         }
 
         G_Condition precondition =
-            A.Condition().WithState(atLocation).WithComparison(preCompare).WithExpectedValue(preExpectedValue);
+            A.Condition().WithState(atLocation).WithComparison(preCompare).WithExpectedReference(preExpectedValue);
         G_Condition effect =
-            A.Condition().WithState(atLocation).WithComparison(effectCompare).WithExpectedValue(effectExpectedValue);
+            A.Condition().WithState(atLocation).WithComparison(effectCompare).WithExpectedReference(effectExpectedValue);
 
         bool result = precondition.CompareConditionToEffect(effect);
         Assert.AreEqual(expectedResult, result);

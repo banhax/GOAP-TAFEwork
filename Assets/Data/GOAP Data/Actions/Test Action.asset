@@ -12,5 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5caa6a19b2ffc943ace514ed7b00712, type: 3}
   m_Name: Test Action
   m_EditorClassIdentifier: NewAssembly::GOAP.G_Action
-  preconditions: []
+  preconditions:
+  - state: {fileID: 11400000, guid: 96a0c0d644f968d4092356af1a704530, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606663802109558853
+    editorActive: 1
+  - state: {fileID: 11400000, guid: acb5605b8a7348a4ba1c7cd6e0230741, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606663802109558863
+    editorActive: 1
+  - state: {fileID: 11400000, guid: 0e2bc0a1e9cbd064a88c715ed9f201c1, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606663802109558857
+    editorActive: 1
   effects: []
+  references:
+    version: 2
+    RefIds:
+    - rid: 5606663802109558853
+      type: {class: Int32, ns: System, asm: mscorlib}
+      data: 
+    - rid: 5606663802109558857
+      type: {class: Single, ns: System, asm: mscorlib}
+      data: 
+    - rid: 5606663802109558863
+      type: {class: Boolean, ns: System, asm: mscorlib}
+      data: 

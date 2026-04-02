@@ -7,8 +7,10 @@ namespace GOAP {
         
         G_State state;
         G_StateComparison comparison = G_StateComparison.equal;
-        object expectedValue;   
+        object expectedValue;
+        Object expectedReference;
         bool met = false;
+        bool useExpectedReference = false;
 
 
         public G_ConditionBuilder() {
@@ -29,6 +31,18 @@ namespace GOAP {
             this.expectedValue = expectedValue;
             return this;
         }
+        public G_ConditionBuilder WithExpectedReference(Object expectedReference) {
+            this.expectedReference = expectedReference;
+            this.useExpectedReference = true;
+            return this;
+        }
+
+        public G_ConditionBuilder WithExpectedReference(Object expectedReference, bool useExpectedReference) {
+            this.expectedReference = expectedReference;
+            this.useExpectedReference = useExpectedReference;
+            return this;
+        }
+
         public G_ConditionBuilder IsMet(bool met) {
             this.met = met;
             return this;
@@ -38,7 +52,12 @@ namespace GOAP {
         #region Object Creation
 
         public G_Condition Build() {
-            G_Condition condition = new G_Condition(state, expectedValue, comparison, met);
+            G_Condition condition = new G_Condition(state,
+                expectedValue,
+                expectedReference,
+                useExpectedReference,
+                comparison,
+                met);
             return condition;
         }
 

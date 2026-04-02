@@ -28,20 +28,39 @@ namespace GOAP {
             get { return expectedValue; }
         }
 
+        // the value we will be comparing to the current value in the state
+        [SerializeReference]
+        Object expectedReference;
+        public Object ExpectedReference {
+            get { return expectedReference; }
+        }
+
+        // has the condition been meet during planning?
+        [SerializeField]
+        bool useExpectedReference = false;
+        public bool UseExpectedReference {
+            get { return useExpectedReference; }
+        }
+
         // has the condition been meet during planning?
         bool met = false;
         public bool Met {
             get { return met; }
         }
+
         #endregion
 
         public G_Condition(G_State state,
             object expectedValue,
+            Object expectedReference,
+            bool useExpectedReference,
             G_StateComparison comparison = G_StateComparison.equal,
             bool met = false) {
 
             this.state = state;
             this.expectedValue = expectedValue;
+            this.expectedReference = expectedReference;
+            this.useExpectedReference = useExpectedReference;
             this.comparison = comparison;
             this.met = met;
         }
@@ -68,7 +87,12 @@ namespace GOAP {
         /// </summary>
         /// <returns></returns>
         public bool DoesStateMeetCondition() {
-            return state.TestState(state, comparison, expectedValue);
+            if (useExpectedReference) {
+                return state.TestState(state, comparison, expectedReference);
+            }
+            else {
+                return state.TestState(state, comparison, expectedValue);
+            } 
         }
 
         /// <summary>
@@ -80,7 +104,12 @@ namespace GOAP {
             bool success = false;
 
             if (state.TestValueMatch(stateToTest.GetValue())) {
-                success = state.TestState(stateToTest, comparison, expectedValue);
+                if (useExpectedReference) {
+                    success = state.TestState(stateToTest, comparison, expectedReference);
+                }
+                else {
+                    success = state.TestState(stateToTest, comparison, expectedValue);
+                }
             }
             else {
                 Debug.LogWarning("Value type of state to test did not match internal state");
@@ -127,6 +156,7 @@ namespace GOAP {
             return A.Condition().WithState(conditionToClone.state)
             .WithComparison(conditionToClone.comparison)
             .WithExpectedValue(conditionToClone.expectedValue)
+            .WithExpectedReference(conditionToClone.expectedReference, conditionToClone.useExpectedReference)
             .IsMet(conditionToClone.met);
         }
 
