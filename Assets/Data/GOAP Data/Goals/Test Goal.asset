@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802914105cc43204da7e7f52f6e0c417, type: 3}
   m_Name: Test Goal
   m_EditorClassIdentifier: NewAssembly::GOAP.G_Goal
-  priority: 0
+  priority: 1
   triggerConditions: []
   goalEffects: []
   references:

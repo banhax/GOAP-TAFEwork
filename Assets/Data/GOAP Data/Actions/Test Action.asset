@@ -16,7 +16,7 @@ MonoBehaviour:
   - state: {fileID: 11400000, guid: acb5605b8a7348a4ba1c7cd6e0230741, type: 2}
     comparison: 0
     expectedValue:
-      rid: 5606663826056938249
+      rid: 5606663826056938390
     expectedReference: {fileID: 0}
     useExpectedReference: 0
     serializedExpectedValue: bFalse
@@ -24,7 +24,7 @@ MonoBehaviour:
   - state: {fileID: 11400000, guid: 0e2bc0a1e9cbd064a88c715ed9f201c1, type: 2}
     comparison: 3
     expectedValue:
-      rid: 5606663826056938250
+      rid: 5606663826056938391
     expectedReference: {fileID: 0}
     useExpectedReference: 0
     serializedExpectedValue: f4
@@ -32,7 +32,7 @@ MonoBehaviour:
   - state: {fileID: 11400000, guid: 96a0c0d644f968d4092356af1a704530, type: 2}
     comparison: 2
     expectedValue:
-      rid: 5606663826056938251
+      rid: 5606663826056938392
     expectedReference: {fileID: 0}
     useExpectedReference: 1
     serializedExpectedValue: i1
@@ -46,14 +46,6 @@ MonoBehaviour:
     useExpectedReference: 1
     serializedExpectedValue: 
     editorActive: 1
-  - state: {fileID: 11400000, guid: f23e7d3c0bbc09d4f8f637cd18b0f4c9, type: 2}
-    comparison: 0
-    expectedValue:
-      rid: 5606663826056938239
-    expectedReference: {fileID: 0}
-    useExpectedReference: 1
-    serializedExpectedValue: 
-    editorActive: 1
   references:
     version: 2
     RefIds:
@@ -62,17 +54,12 @@ MonoBehaviour:
       data:
         item: {fileID: 11400000, guid: fcdef361b00936f429f6ceea836efdbe, type: 2}
         quantity: 5
-    - rid: 5606663826056938239
-      type: {class: ItemStack, ns: , asm: NewAssembly}
-      data:
-        item: {fileID: 11400000, guid: fcdef361b00936f429f6ceea836efdbe, type: 2}
-        quantity: 6
-    - rid: 5606663826056938249
+    - rid: 5606663826056938390
       type: {class: Boolean, ns: System, asm: mscorlib}
       data: 
-    - rid: 5606663826056938250
+    - rid: 5606663826056938391
       type: {class: Single, ns: System, asm: mscorlib}
       data: 
-    - rid: 5606663826056938251
+    - rid: 5606663826056938392
       type: {class: Int32, ns: System, asm: mscorlib}
       data: 

@@ -1,11 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using GOAP;
 
 public class Inventory : MonoBehaviour
 {
     [SerializeField]
     List<ItemStack> inventory = new List<ItemStack>();
+
+    [SerializeField]
+    G_Inventory inventoryState;
+
+    public G_Inventory GetWorldState() {
+        return inventoryState;
+    }
 
     /// <summary>
     /// For adding items to the inventory. If it finds the item type in the inventory, it will add to the stack of that item.
