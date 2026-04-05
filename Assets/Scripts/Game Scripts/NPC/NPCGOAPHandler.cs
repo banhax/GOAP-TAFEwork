@@ -21,6 +21,10 @@ namespace GOAP {
 
         void Start() {
             CreateLocalWorldState();
+            NPCPathing pathing = GetComponent<NPCPathing>();
+            if (pathing != null) {
+                pathing.Init(this);
+            }
         }
 
         public G_WorldState GetLocalWorldState() {

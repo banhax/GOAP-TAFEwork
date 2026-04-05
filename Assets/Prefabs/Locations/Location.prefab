@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 2957030337184285227}
   m_Layer: 7
   m_Name: Location Area
-  m_TagString: Untagged
+  m_TagString: location
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

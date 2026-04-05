@@ -14,6 +14,8 @@ namespace GOAP {
             this.actionPool = actionPool;
             this.goals = goals;
         }
+        public G_State FindState(G_State referenceState) {
+            return states.Find((state) => state.name == referenceState.name);
+        }
     }
-
 }

@@ -1,6 +1,7 @@
 using GOAP;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Map : MonoBehaviour
@@ -10,7 +11,7 @@ public class Map : MonoBehaviour
 
     public List<NPCGOAPHandler> npcs = new List<NPCGOAPHandler>();
 
-    // locations
+    public List<LocationInstance> locations = new List<LocationInstance>();
     #endregion
 
     #region  Registry
@@ -21,6 +22,9 @@ public class Map : MonoBehaviour
         }
         else if (obj is NPCGOAPHandler) {
             Register(obj as NPCGOAPHandler);
+        }
+        else if (obj is LocationInstance) {
+            Register(obj as LocationInstance);
         }
     }
 
@@ -33,6 +37,12 @@ public class Map : MonoBehaviour
     void Register(NPCGOAPHandler npc) {
         if (!npcs.Contains(npc)) {
             npcs.Add(npc);
+        }
+    }
+
+    void Register(LocationInstance location) {
+        if (!locations.Contains(location)) {
+            locations.Add(location);
         }
     }
 
@@ -59,7 +69,27 @@ public class Map : MonoBehaviour
             }
         }
 
-        return null;
+        return inventory;
+    }
+
+    public LocationInstance FindNearestObjectOfType(Vector3 searchPosition, LocationType type) {
+        LocationInstance locationInstance = null;
+        List<LocationInstance> foundLocations = FindAllObjectsOfType(type);
+
+        if (foundLocations.Count > 0) {
+            float closestDistance = Mathf.Infinity;
+            float currentDistance;
+
+            for (int i = 0; i < foundLocations.Count; i++) {
+                currentDistance = Vector3.Distance(searchPosition, foundLocations[i].GetAccessPoint());
+                if (locationInstance == null || currentDistance < closestDistance) {
+                    locationInstance = foundLocations[i];
+                    closestDistance = currentDistance;
+                }
+            }
+        }
+
+        return locationInstance;
     }
 
     #endregion
@@ -76,6 +106,18 @@ public class Map : MonoBehaviour
         }
 
         return foundInventories;
+    }
+
+    public List<LocationInstance> FindAllObjectsOfType(LocationType type) {
+        List<LocationInstance> foundLocations = new List<LocationInstance>();
+
+        for (int i = 0; i < locations.Count; i++) {
+            if (locations[i].GetLocationType().name == type.name) {
+                foundLocations.Add(locations[i]);
+            }
+        }
+
+        return foundLocations;
     }
 
     #endregion
