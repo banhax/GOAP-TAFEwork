@@ -20,6 +20,8 @@ public class Inventory : MonoBehaviour
         }   
     }
 
+
+    #region World State
     void AssignWorldState() {
         if (refInventoryState.isLocal) {
             inventoryState = refInventoryState.Clone() as G_Inventory;
@@ -31,6 +33,10 @@ public class Inventory : MonoBehaviour
     public G_Inventory GetWorldState() {
         return inventoryState;
     }
+
+    #endregion
+
+    #region Inventory Functions
 
     /// <summary>
     /// For adding items to the inventory. If it finds the item type in the inventory, it will add to the stack of that item.
@@ -74,4 +80,39 @@ public class Inventory : MonoBehaviour
 
         return foundStack;
     }
+
+    #endregion
+
+    #region Trade
+
+    public void Trade(ItemStack requestedItem, ItemStack offeredItem) {
+        
+        if (IsTrade(requestedItem, offeredItem)) { // trade
+
+        }
+        else if (IsTake(requestedItem, offeredItem)) { // take
+
+        }
+        else if (IsGive(requestedItem, offeredItem)) { // give
+
+        }
+    }
+
+    #endregion
+
+    #region Conditions
+
+    bool IsTrade(ItemStack requestedItem, ItemStack offeredItem) {
+        return requestedItem != null && offeredItem != null;
+    }
+
+    bool IsTake(ItemStack requestedItem, ItemStack offeredItem) {
+        return requestedItem != null && offeredItem == null;
+    }
+
+    bool IsGive(ItemStack requestedItem, ItemStack offeredItem) {
+        return requestedItem == null && offeredItem != null;
+    }
+
+    #endregion
 }
