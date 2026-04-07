@@ -14,6 +14,28 @@ public class NPCPathing : MonoBehaviour {
     [SerializeField] G_AtLocation locationTrackingStateRef;
     G_AtLocation locationTrackingState;
 
+    #region Pathing
+
+    public void StartPath(Vector3 destination) {
+        agent.SetDestination(destination);
+    }
+
+    public void StartPath(LocationInstance locationInstance) {
+        agent.SetDestination(locationInstance.GetAccessPoint());
+    }
+
+    public bool IsAtLocation(LocationInstance location) {
+        return currentLocation == location;
+    }
+
+    public bool IsAtLocationOfType(LocationType type) {
+        return currentLocation != null ?
+            currentLocation.GetLocationType() == type
+            : type == null;
+    }
+
+    #endregion
+
     #region Setup
 
     public void Init(NPCGOAPHandler worldState) {
@@ -33,21 +55,6 @@ public class NPCPathing : MonoBehaviour {
     }
 
     #endregion
-
-    #region Test Functions
-
-    public bool IsInLocation(LocationInstance location) {
-        return currentLocation == location;
-    }
-
-    public bool IsAtLocationOfType(LocationType type) {
-        return currentLocation != null ?
-            currentLocation.GetLocationType() == type
-            : type == null;
-    }
-
-    #endregion
-
 
     #region Location Entry and Exit
     void EnterLocation(LocationInstance location) {

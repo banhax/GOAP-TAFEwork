@@ -6,12 +6,19 @@ namespace GOAP {
 
     [CreateAssetMenu(fileName = "G_Action", menuName = "GOAP/Actions/Base Action")]
     public class G_Action : ScriptableObject {
-        #region Values
+        #region Data
 
         internal int cost = 10;
-        int priority = 0;
+        internal int priority = 0;
         public List<G_Condition> preconditions = new List<G_Condition>();
         public List<G_Condition> effects = new List<G_Condition>();
+
+        internal event DelegateTypes.Void_Bool actionEnded;
+        public event DelegateTypes.Void_Bool ActionEnded {
+            add { actionEnded += value; }
+            remove { actionEnded -= value; }
+        }
+
         public void Construct(string name,
             List<G_Condition> preconditions,
             List<G_Condition> effects,
@@ -117,19 +124,42 @@ namespace GOAP {
 
         #region Behaviour
 
+        bool CheckPreconditionsAtRunTime() {
+            bool ready = true;
+
+            for (int i = 0; i < preconditions.Count; i++) {
+                if (!preconditions[i].DoesStateMeetCondition()) {
+                    ready = false;
+                }
+            }
+
+            return ready;
+        }
+
+
         /// <summary>
         /// Called when the action is first run by the NPC with the NPC's gameObject passed in as parameter
         /// </summary>
-        /// <param name="npcObject"></param>
-        public virtual void StartAction(GameObject npcObject) {
+        /// <param name="NPC"></param>
+        public bool StartAction(NPCGOAPHandler NPC) {
+            if (CheckPreconditionsAtRunTime()) {
+                StartActionContents(NPC);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        internal virtual void StartActionContents(NPCGOAPHandler NPC) {
 
         }
 
         /// <summary>
         /// Called during Update every frame by the NPC object with GameObject of the NPC passed in as a parameter
         /// </summary>
-        /// <param name="npcObject"></param>
-        public virtual void UpdateAction(GameObject npcObject) {
+        /// <param name="NPC"></param>
+        public virtual void UpdateAction(NPCGOAPHandler NPC) {
 
         }
 
@@ -138,7 +168,7 @@ namespace GOAP {
         /// </summary>
         /// <param name="success"></param>
         internal virtual void EndAction(bool success) {
-
+            actionEnded?.Invoke(success);
         }
 
         #endregion
