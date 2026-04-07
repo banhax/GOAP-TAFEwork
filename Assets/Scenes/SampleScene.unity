@@ -1044,6 +1044,26 @@ PrefabInstance:
       propertyPath: m_BaseOffset
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2432395171809465209, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: inventoryState
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432395171809465209, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: refInventoryState
+      value: 
+      objectReference: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+    - target: {fileID: 2432395171809465209, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: inventory.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2432395171809465209, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: inventory.Array.data[0].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 11b56be665686394485cbffb9edc689b, type: 2}
+    - target: {fileID: 2432395171809465209, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: inventory.Array.data[0].quantity
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4260508362352191203, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -1055,7 +1075,7 @@ PrefabInstance:
     - target: {fileID: 5101140288031633492, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: testAction
       value: 
-      objectReference: {fileID: 11400000, guid: e75629f7e652d3749bae34a516ad3e0b, type: 2}
+      objectReference: {fileID: 11400000, guid: 651e30c817d331045b54f0382f26ed0a, type: 2}
     - target: {fileID: 5101140288031633492, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: worldStateReference
       value: 
@@ -1066,7 +1086,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b68d7aa4014bb444aa9cb1a066c693c2, type: 2}
     - target: {fileID: 9038521031731263522, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 7.29
       objectReference: {fileID: 0}
     - target: {fileID: 9038521031731263522, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1074,7 +1094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9038521031731263522, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: -14.56
       objectReference: {fileID: 0}
     - target: {fileID: 9038521031731263522, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_LocalRotation.w

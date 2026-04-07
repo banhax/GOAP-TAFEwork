@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa85d1fb60108341a875133cd25ca2c, type: 3}
   m_Name: Axe
   m_EditorClassIdentifier: NewAssembly::Item
-  stackable: 0
+  stackable: 1

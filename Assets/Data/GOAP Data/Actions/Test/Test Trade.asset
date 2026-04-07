@@ -1,0 +1,104 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7202b8638409be419093d1d6c7425a0, type: 3}
+  m_Name: Test Trade
+  m_EditorClassIdentifier: NewAssembly::GOAP.G_Trade
+  preconditions:
+  - state: {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: -2
+    expectedReference: {fileID: 11400000, guid: 2caae591b2402124f821214b7ff04ec3, type: 2}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  - state: {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
+    comparison: 2
+    expectedValue:
+      rid: 5606663937629880379
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  - state: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+    comparison: 4
+    expectedValue:
+      rid: 5606663937629880380
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  effects:
+  - state: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+    comparison: 2
+    expectedValue:
+      rid: 5606663937629880381
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  - state: {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606663937629880382
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  - state: {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
+    comparison: 2
+    expectedValue:
+      rid: 5606663937629880383
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  targetInventory: {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
+  requestedItem:
+    item: {fileID: 11400000, guid: 48ba02c294d5c9342b2768466b68b805, type: 2}
+    quantity: 1
+  offeredItem:
+    item: {fileID: 11400000, guid: 11b56be665686394485cbffb9edc689b, type: 2}
+    quantity: 1
+  requestFullQuantity: 1
+  tradeTime: 0.3
+  isExtraction: 0
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
+    - rid: 5606663937629880379
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 48ba02c294d5c9342b2768466b68b805, type: 2}
+        quantity: 0
+    - rid: 5606663937629880380
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 11b56be665686394485cbffb9edc689b, type: 2}
+        quantity: 1
+    - rid: 5606663937629880381
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 48ba02c294d5c9342b2768466b68b805, type: 2}
+        quantity: 0
+    - rid: 5606663937629880382
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 48ba02c294d5c9342b2768466b68b805, type: 2}
+        quantity: 0
+    - rid: 5606663937629880383
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 11b56be665686394485cbffb9edc689b, type: 2}
+        quantity: 0

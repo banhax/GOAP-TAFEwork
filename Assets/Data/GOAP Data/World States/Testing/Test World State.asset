@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Test World State
   m_EditorClassIdentifier: NewAssembly::GOAP.G_WorldState
   states:
-  - {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
+  - {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+  - {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
   actionPool:
-  - {fileID: 11400000, guid: e75629f7e652d3749bae34a516ad3e0b, type: 2}
+  - {fileID: 11400000, guid: 651e30c817d331045b54f0382f26ed0a, type: 2}
   goals: []

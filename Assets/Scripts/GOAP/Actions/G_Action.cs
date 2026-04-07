@@ -73,10 +73,10 @@ namespace GOAP {
         /// <param name="unmetPrecondition"></param>
         /// <returns></returns>
         public bool DoesEffectMatch(G_Condition unmetPrecondition) {
-            G_Condition releveantEffect = effects.Find(
+            G_Condition relevantEffect = effects.Find(
                 (effect) => unmetPrecondition.CompareConditionToEffect(effect)
                 );
-            return releveantEffect != null;
+            return relevantEffect != null;
         }
 
         public virtual int GetCost() {

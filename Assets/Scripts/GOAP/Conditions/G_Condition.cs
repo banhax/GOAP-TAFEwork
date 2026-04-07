@@ -35,7 +35,6 @@ namespace GOAP {
             get { return expectedReference; }
         }
 
-        // has the condition been meet during planning?
         [SerializeField]
         bool useExpectedReference = false;
         public bool UseExpectedReference {

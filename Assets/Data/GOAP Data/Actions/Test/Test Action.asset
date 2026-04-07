@@ -43,7 +43,7 @@ MonoBehaviour:
     expectedValue:
       rid: 5606663826056937536
     expectedReference: {fileID: 0}
-    useExpectedReference: 1
+    useExpectedReference: 0
     serializedExpectedValue: 
     editorActive: 1
   references:
