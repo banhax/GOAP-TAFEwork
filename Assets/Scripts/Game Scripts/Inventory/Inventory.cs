@@ -5,6 +5,7 @@ using GOAP;
 
 public class Inventory : MonoBehaviour
 {
+    //public int capacity = 10;
     [SerializeField]
     List<ItemStack> inventory = new List<ItemStack>();
     MapInjector mapInjector = new MapInjector();
@@ -85,17 +86,46 @@ public class Inventory : MonoBehaviour
 
     #region Trade
 
-    public void Trade(ItemStack requestedItem, ItemStack offeredItem) {
-        
-        if (IsTrade(requestedItem, offeredItem)) { // trade
+    public ItemStack Trade(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity) {
 
+        ItemStack recievedItem = null;
+
+        if (IsTrade(requestedItem, offeredItem)) { // trade
+            recievedItem = TradeItem(requestedItem, offeredItem, requestFullQuantity);
         }
         else if (IsTake(requestedItem, offeredItem)) { // take
-
+            recievedItem = TakeItem(requestedItem, requestFullQuantity);
         }
         else if (IsGive(requestedItem, offeredItem)) { // give
-
+            GiveItem(offeredItem);
         }
+
+        return recievedItem;
+    }
+
+    ItemStack TradeItem(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity) {
+        ItemStack recievedItem = null;
+        recievedItem = TakeItem(requestedItem, requestFullQuantity);
+        GiveItem(offeredItem);
+        return recievedItem;
+    }
+
+    ItemStack TakeItem(ItemStack requestedItem, bool requestFullQuantity) {
+        ItemStack foundItem = FindInInventory(requestedItem.item);
+
+        if (CanTakeFromInventory(requestedItem, foundItem, requestFullQuantity)) {
+            inventory.Remove(foundItem);
+        }
+        return foundItem;
+    }
+
+    void GiveItem(ItemStack offeredItem) {
+        // commented code left for reference to possible expansion of the system
+        //if (inventory.Count < capacity
+        //        || inventory.Count == capacity && inventory.Exists((stack) => stack.item == offeredItem.item)) {
+
+        //}
+        AddToInventory(offeredItem);
     }
 
     #endregion
@@ -112,6 +142,16 @@ public class Inventory : MonoBehaviour
 
     bool IsGive(ItemStack requestedItem, ItemStack offeredItem) {
         return requestedItem == null && offeredItem != null;
+    }
+
+    bool CanTakeFromInventory(ItemStack requestedItem, ItemStack foundItem, bool requestFullQuantity) {
+        return foundItem != null
+                && (!requestFullQuantity
+                || InventoryHasQuantity(foundItem, requestedItem, requestFullQuantity));
+    }
+
+    bool InventoryHasQuantity(ItemStack foundItem, ItemStack requestedItem, bool requestFullQuantity) {
+        return requestFullQuantity && foundItem.quantity >= requestedItem.quantity;
     }
 
     #endregion
