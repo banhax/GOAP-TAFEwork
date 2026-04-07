@@ -14,6 +14,20 @@ namespace GOAP {
         [Header("Instance References")]
         //Map localMap;
         LocationInstance target;
+
+        public void Construct(string name,
+            List<G_Condition> preconditions,
+            List<G_Condition> effects,
+            LocationType targetLocationType,
+            bool canEndAtDifferentTarget,
+            int cost = 10,
+            int priority = 0) {
+
+            Construct(name, preconditions, effects, cost, priority);
+            this.targetLocationType = targetLocationType;
+            this.canEndAtDifferentTarget = canEndAtDifferentTarget;
+        }
+
         #endregion
 
         #region Action Running
@@ -55,10 +69,6 @@ namespace GOAP {
 
         #region Other
 
-        void AssignTargetLocationType(LocationType targetLocationType) {
-            this.targetLocationType = targetLocationType;
-        }
-
         public override G_Action Clone() {
             G_GoTo clonedAction = ScriptableObject.CreateInstance<G_GoTo>();
             List<G_Condition> clonedPreconditions = new List<G_Condition>();
@@ -74,9 +84,11 @@ namespace GOAP {
             clonedAction.Construct(this.name,
                 clonedPreconditions,
                 clonedEffects,
+                this.targetLocationType,
+                this.canEndAtDifferentTarget,
                 this.cost,
                 this.priority);
-            clonedAction.AssignTargetLocationType(this.targetLocationType);
+
             return clonedAction;
         }
 

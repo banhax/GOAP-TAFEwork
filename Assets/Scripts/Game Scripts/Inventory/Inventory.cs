@@ -133,25 +133,33 @@ public class Inventory : MonoBehaviour
     #region Conditions
 
     bool IsTrade(ItemStack requestedItem, ItemStack offeredItem) {
-        return requestedItem != null && offeredItem != null;
+        return RequestedItemIsValid(requestedItem) && OfferedItemIsValid(offeredItem);
     }
 
     bool IsTake(ItemStack requestedItem, ItemStack offeredItem) {
-        return requestedItem != null && offeredItem == null;
+        return RequestedItemIsValid(requestedItem) && offeredItem == null;
     }
 
     bool IsGive(ItemStack requestedItem, ItemStack offeredItem) {
-        return requestedItem == null && offeredItem != null;
+        return requestedItem == null && OfferedItemIsValid(offeredItem);
+    }
+
+    bool RequestedItemIsValid(ItemStack requestedItem) {
+        return requestedItem != null && requestedItem.item != null;
+    }
+
+    bool OfferedItemIsValid(ItemStack offeredItem) {
+        return offeredItem != null && offeredItem.item != null;
     }
 
     bool CanTakeFromInventory(ItemStack requestedItem, ItemStack foundItem, bool requestFullQuantity) {
         return foundItem != null
-                && (!requestFullQuantity
-                || InventoryHasQuantity(foundItem, requestedItem, requestFullQuantity));
+                && InventoryHasQuantity(foundItem, requestedItem, requestFullQuantity);
     }
 
     bool InventoryHasQuantity(ItemStack foundItem, ItemStack requestedItem, bool requestFullQuantity) {
-        return requestFullQuantity && foundItem.quantity >= requestedItem.quantity;
+        return !requestFullQuantity && foundItem.quantity > 0 
+            || requestFullQuantity && foundItem.quantity >= requestedItem.quantity;
     }
 
     #endregion
