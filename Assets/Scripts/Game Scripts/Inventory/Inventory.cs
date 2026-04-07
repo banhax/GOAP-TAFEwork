@@ -86,21 +86,50 @@ public class Inventory : MonoBehaviour
 
     #region Trade
 
-    public ItemStack Trade(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity) {
+    public bool IsTradeValid(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity) {
 
-        ItemStack recievedItem = null;
+        bool isValid = false;
+
+        if (IsTrade(requestedItem, offeredItem)) { // trade
+            if (CanTakeFromInventory(requestedItem, requestFullQuantity)) {
+                isValid = true;
+            }
+        }
+        else if (IsTake(requestedItem, offeredItem)) { // take
+            if (CanTakeFromInventory(requestedItem, requestFullQuantity)) {
+                isValid = true;
+            }
+        }
+        else if (IsGive(requestedItem, offeredItem)) { // give
+            isValid = true;
+        }
+
+        return isValid;
+    }
+
+    public bool Trade(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity, out ItemStack recievedItem) {
+
+        bool succeeded = false;
+        recievedItem = null;
 
         if (IsTrade(requestedItem, offeredItem)) { // trade
             recievedItem = TradeItem(requestedItem, offeredItem, requestFullQuantity);
+            if (recievedItem != null) {
+                succeeded = true;
+            }
         }
         else if (IsTake(requestedItem, offeredItem)) { // take
             recievedItem = TakeItem(requestedItem, requestFullQuantity);
+            if (recievedItem != null) {
+                succeeded = true;
+            }
         }
         else if (IsGive(requestedItem, offeredItem)) { // give
             GiveItem(offeredItem);
+            succeeded = true;
         }
 
-        return recievedItem;
+        return succeeded;
     }
 
     ItemStack TradeItem(ItemStack requestedItem, ItemStack offeredItem, bool requestFullQuantity) {
@@ -132,27 +161,29 @@ public class Inventory : MonoBehaviour
 
     #region Conditions
 
-    bool IsTrade(ItemStack requestedItem, ItemStack offeredItem) {
-        return RequestedItemIsValid(requestedItem) && OfferedItemIsValid(offeredItem);
+    public bool IsTrade(ItemStack requestedItem, ItemStack offeredItem) {
+        return IsStackValid(requestedItem) && IsStackValid(offeredItem);
     }
 
-    bool IsTake(ItemStack requestedItem, ItemStack offeredItem) {
-        return RequestedItemIsValid(requestedItem) && offeredItem == null;
+    public bool IsTake(ItemStack requestedItem, ItemStack offeredItem) {
+        return IsStackValid(requestedItem) && offeredItem == null;
     }
 
-    bool IsGive(ItemStack requestedItem, ItemStack offeredItem) {
-        return requestedItem == null && OfferedItemIsValid(offeredItem);
+    public bool IsGive(ItemStack requestedItem, ItemStack offeredItem) {
+        return requestedItem == null && IsStackValid(offeredItem);
     }
 
-    bool RequestedItemIsValid(ItemStack requestedItem) {
-        return requestedItem != null && requestedItem.item != null;
+    public bool IsStackValid(ItemStack stack) {
+        return stack != null && stack.item != null;
     }
 
-    bool OfferedItemIsValid(ItemStack offeredItem) {
-        return offeredItem != null && offeredItem.item != null;
+    public bool CanTakeFromInventory(ItemStack requestedItem, ItemStack foundItem, bool requestFullQuantity) {
+        return foundItem != null
+                && InventoryHasQuantity(foundItem, requestedItem, requestFullQuantity);
     }
-
-    bool CanTakeFromInventory(ItemStack requestedItem, ItemStack foundItem, bool requestFullQuantity) {
+    
+    public bool CanTakeFromInventory(ItemStack requestedItem, bool requestFullQuantity) {
+        ItemStack foundItem = FindInInventory(requestedItem.item);
         return foundItem != null
                 && InventoryHasQuantity(foundItem, requestedItem, requestFullQuantity);
     }
