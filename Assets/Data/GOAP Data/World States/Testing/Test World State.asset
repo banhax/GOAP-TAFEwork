@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: NewAssembly::GOAP.G_WorldState
   states:
   - {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
-  actionPool: []
+  actionPool:
+  - {fileID: 11400000, guid: e75629f7e652d3749bae34a516ad3e0b, type: 2}
   goals: []

@@ -106,8 +106,18 @@ namespace GOAP {
                 StartAction(testPlan[0]);
             }
             else {
-                StartAction(testAction);
+                StartAction(AddTestActionToPool(testAction));
             }
+        }
+
+        G_Action AddTestActionToPool(G_Action testAction) {
+            G_Action testActionDupe = localWorldState.FindAction(testAction);
+
+            if (testActionDupe == null) {
+                TryTransferAction(localActions, localStates, testAction);
+            }
+
+            return localWorldState.FindAction(testAction);
         }
 
         #endregion

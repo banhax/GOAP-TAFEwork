@@ -60,7 +60,7 @@ namespace GOAP {
         }
 
         public override G_Action Clone() {
-            G_Action clonedAction = ScriptableObject.CreateInstance<G_GoTo>();
+            G_GoTo clonedAction = ScriptableObject.CreateInstance<G_GoTo>();
             List<G_Condition> clonedPreconditions = new List<G_Condition>();
             List<G_Condition> clonedEffects = new List<G_Condition>();
 
@@ -76,7 +76,7 @@ namespace GOAP {
                 clonedEffects,
                 this.cost,
                 this.priority);
-            AssignTargetLocationType(this.targetLocationType);
+            clonedAction.AssignTargetLocationType(this.targetLocationType);
             return clonedAction;
         }
 

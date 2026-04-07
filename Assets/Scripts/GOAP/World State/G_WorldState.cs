@@ -17,5 +17,9 @@ namespace GOAP {
         public G_State FindState(G_State referenceState) {
             return states.Find((state) => state.name == referenceState.name);
         }
+
+        public G_Action FindAction(G_Action referenceAction) {
+            return actionPool.Find((action) => action.name == referenceAction.name);
+        }
     }
 }

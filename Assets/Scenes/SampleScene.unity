@@ -885,6 +885,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tree
       objectReference: {fileID: 0}
+    - target: {fileID: 2371188608203510617, guid: f7621327b1db0c04484ac57d65d00227, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5257561040099296950, guid: f7621327b1db0c04484ac57d65d00227, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1032,10 +1040,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 464161268}
     m_Modifications:
+    - target: {fileID: 1477334015858367815, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: m_BaseOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4260508362352191203, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: m_Name
       value: NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 5101140288031633492, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: isTest
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101140288031633492, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
+      propertyPath: testAction
+      value: 
+      objectReference: {fileID: 11400000, guid: e75629f7e652d3749bae34a516ad3e0b, type: 2}
     - target: {fileID: 5101140288031633492, guid: e741997c4b0e40d4e915921fc45bfeed, type: 3}
       propertyPath: worldStateReference
       value: 
