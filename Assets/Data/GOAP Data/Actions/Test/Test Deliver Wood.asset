@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7202b8638409be419093d1d6c7425a0, type: 3}
   m_Name: Test Deliver Wood
   m_EditorClassIdentifier: NewAssembly::GOAP.G_Trade
+  cost: 10
+  priority: 0
   preconditions:
   - state: {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
     comparison: 0
     expectedValue:
       rid: -2
     expectedReference: {fileID: 11400000, guid: c3d7ef0929f482442b5b93a160185d7d, type: 2}
-    useExpectedReference: 0
+    useExpectedReference: 1
     serializedExpectedValue: 
     editorActive: 1
   - state: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
@@ -75,4 +77,4 @@ MonoBehaviour:
       type: {class: ItemStack, ns: , asm: NewAssembly}
       data:
         item: {fileID: 11400000, guid: d08111f1bccd31348973f34a60420543, type: 2}
-        quantity: 10
+        quantity: 9999

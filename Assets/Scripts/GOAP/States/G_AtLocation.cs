@@ -143,6 +143,11 @@ namespace GOAP {
                 property.FindPropertyRelative("useExpectedReference").boolValue = true;
                 property.FindPropertyRelative("serializedExpectedValue").stringValue = "";
             }
+
+            if (property.FindPropertyRelative("useExpectedReference").boolValue != true) {
+                property.FindPropertyRelative("useExpectedReference").boolValue = true;
+            }
+
             if (comparison.enumValueIndex != (int)G_StateComparison.EqualTo) {
                 comparison.enumValueIndex = (int)G_StateComparison.EqualTo;
             }

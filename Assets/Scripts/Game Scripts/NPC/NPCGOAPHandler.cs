@@ -20,10 +20,14 @@ namespace GOAP {
         Inventory inventory;
 
         [Header("Action Running")]
+        [SerializeField]
         G_Action currentAction;
         [SerializeField]
         List<G_Action> currentPlan = new List<G_Action>();
         bool readyForNextAction = true; // flag once an action has ended so that we can go to the next one
+
+        [Header("Goal Selection")]
+        [SerializeField] G_Goal currentGoal;
 
         [Header("Testing")]
         public bool isTest = false;
@@ -155,11 +159,32 @@ namespace GOAP {
         #region Action Running
 
         private void Update() {
+            //Debug.Log($"currentGoal = {currentGoal}");
+            //Debug.Log($"currentPlan.Count = {currentPlan.Count}");
+            if (currentGoal == null || currentGoal != null && currentPlan.Count == 0) {
+                SelectGoal();
+            }
             if (currentAction != null) {
                 UpdateCurrentAction();
             }
-            else if (readyForNextAction && currentPlan.Count > 0) {
+            else if (readyForNextAction && currentPlan.Count > 0 && currentPlan[0] != null) {
+                //Debug.Log($"currentPlan[0] = {currentPlan[0]}");
                 StartAction(currentPlan[0]);
+            }
+        }
+
+        void SelectGoal() {
+            //Debug.Log($"Selecting goal");
+            List<G_Action> tempPlan = new List<G_Action>();
+            for (int i = 0; i < localWorldState.goals.Count; i++) {
+                if (G_Planner.GeneratePlan(localWorldState.goals[i], localWorldState, out tempPlan)) {
+                    //Debug.Log($"localWorldState.goals[{i}] = {localWorldState.goals[i]}");
+                    currentGoal = localWorldState.goals[i];
+                    currentPlan = tempPlan;
+                    for (int g = 0; g < tempPlan.Count; g++) {
+                        //Debug.Log($"tempPlan action #{g} = {tempPlan[g]}");
+                    }
+                }
             }
         }
 
@@ -171,6 +196,20 @@ namespace GOAP {
 
             if (!started) {
                 print($"Plan failed at action {currentAction.name}");
+                AttemptReplan();
+            }
+        }
+
+        void AttemptReplan() {
+            ClearCurrentAction();
+            readyForNextAction = true;
+            List<G_Action> tempPlan = new List<G_Action>();
+            if (G_Planner.GeneratePlan(currentGoal, localWorldState, out tempPlan)) {
+                Debug.Log("replanned");
+                currentPlan = tempPlan;
+            }
+            else {
+                currentGoal = null;
             }
         }
 
@@ -179,7 +218,7 @@ namespace GOAP {
         }
 
         void HandleEndOfAction(bool success) {
-            currentAction.ActionEnded -= HandleEndOfAction;
+            
             if (currentPlan.Contains(currentAction)) {
                 currentPlan.Remove(currentAction);
             }
@@ -193,6 +232,17 @@ namespace GOAP {
                 // could attempt a replan, or just try a different goal
             }
 
+            if (currentPlan.Count == 0 && currentGoal != null) {
+                print("plan finished");
+                bool goalAchieved = currentGoal.DidGoalSucceed();
+                print($"Did goal succeed? {goalAchieved}");
+                currentGoal = null;
+            }
+            ClearCurrentAction();
+        }
+
+        void ClearCurrentAction() {
+            currentAction.ActionEnded -= HandleEndOfAction;
             currentAction = null;
         }
 

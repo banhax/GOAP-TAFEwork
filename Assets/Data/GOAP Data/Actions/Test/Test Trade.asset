@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7202b8638409be419093d1d6c7425a0, type: 3}
   m_Name: Test Trade
   m_EditorClassIdentifier: NewAssembly::GOAP.G_Trade
+  cost: 10
+  priority: 0
   preconditions:
   - state: {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
     comparison: 0
     expectedValue:
       rid: -2
     expectedReference: {fileID: 11400000, guid: 2caae591b2402124f821214b7ff04ec3, type: 2}
-    useExpectedReference: 0
+    useExpectedReference: 1
     serializedExpectedValue: 
     editorActive: 1
   - state: {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}

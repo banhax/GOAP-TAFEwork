@@ -9,7 +9,7 @@ public class NPCPathing : MonoBehaviour {
     public NavMeshAgent Agent { get { return agent; } }
 
     NPCGOAPHandler worldState;
-
+    [SerializeField]
     LocationInstance currentLocation; // use this for tracking current location
     [SerializeField] G_AtLocation locationTrackingStateRef;
     G_AtLocation locationTrackingState;

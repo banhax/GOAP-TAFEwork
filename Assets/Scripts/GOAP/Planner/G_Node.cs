@@ -99,21 +99,25 @@ namespace GOAP {
             List<G_Condition> preconditions,
             G_WorldState worldStateRef) {
 
-                // actionPool
-                this.nodeActionPool = new List<G_Action>(nodeActionPool);
+            // actionPool
+            this.nodeActionPool = new List<G_Action>(nodeActionPool);
 
-                // preconditions
-                this.preconditions = new List<G_Condition>(preconditions);
+            // preconditions
+            this.preconditions = new List<G_Condition>(preconditions);
 
-                // world state reference
-                this.worldStateRef = worldStateRef;
+            for (int i = 0; i < preconditions.Count; i++) {
+                this.preconditions.Add(G_Condition.Clone(preconditions[i]));
+            }
 
-                nodeState = G_NodeState.open;
+            // world state reference
+            this.worldStateRef = worldStateRef;
 
-                // determine unmet preconditions
-                this.unmetPreconditions = ProcessPreconditions(this.preconditions, this.worldStateRef);
+            nodeState = G_NodeState.open;
 
-                isGoalNode = true;
+            // determine unmet preconditions
+            this.unmetPreconditions = ProcessPreconditions(this.preconditions, this.worldStateRef);
+
+            isGoalNode = true;
         }
 
         #endregion
@@ -212,14 +216,14 @@ namespace GOAP {
 
         List<G_Action> AddToPlan(List<G_Action> plan) {
             plan.Add(nodeAction);
-            if (!parentNode.isGoalNode && parentNode != null && nodeAction != null) {
+            if (parentNode != null && !parentNode.isGoalNode && nodeAction != null) {
                 plan = parentNode.AddToPlan(plan);
             }
             else if (!isGoalNode && nodeAction == null) {
                 plan = null;
                 Debug.LogWarning($"Node action was null, returning null plan");
             }
-                return plan;
+            return plan;
         }
 
         #endregion

@@ -23,8 +23,8 @@ MonoBehaviour:
     serializedExpectedValue: 
     editorActive: 1
   goalEffects:
-  - state: {fileID: 11400000, guid: d2274b8f3f559704ba29928b0a33cacf, type: 2}
-    comparison: 2
+  - state: {fileID: 11400000, guid: cf10d79015afa0941b48459d20dfd993, type: 2}
+    comparison: 4
     expectedValue:
       rid: 5606663985317281865
     expectedReference: {fileID: 0}
@@ -43,4 +43,4 @@ MonoBehaviour:
       type: {class: ItemStack, ns: , asm: NewAssembly}
       data:
         item: {fileID: 11400000, guid: d08111f1bccd31348973f34a60420543, type: 2}
-        quantity: 0
+        quantity: 9999

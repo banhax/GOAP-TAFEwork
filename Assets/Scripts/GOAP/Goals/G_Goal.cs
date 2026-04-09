@@ -21,6 +21,24 @@ namespace GOAP {
             this.priority = priority;
         }
 
+        public bool CanStartGoal() {
+            return AllConditionsMet(triggerConditions);
+        }
+
+        public bool DidGoalSucceed() {
+            return AllConditionsMet(goalEffects);
+        }
+
+        bool AllConditionsMet(List<G_Condition> conditions) {
+            bool success = true;
+            for (int i = 0; i < conditions.Count; i++) {
+                if (!conditions[i].DoesStateMeetCondition()) {
+                    success = false;
+                }
+            }
+            return success;
+        }
+
         public void TransferToLocalWorldStates(List<G_State> localStates) {
             for (int i = 0; i < triggerConditions.Count; i++) {
                 triggerConditions[i].TrySwitchToLocalState(localStates);
