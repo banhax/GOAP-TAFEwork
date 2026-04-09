@@ -7,8 +7,9 @@ namespace GOAP {
     [CreateAssetMenu(fileName = "G_Action", menuName = "GOAP/Actions/Base Action")]
     public class G_Action : ScriptableObject {
         #region Data
-
+        [SerializeField]
         internal int cost = 10;
+        [SerializeField]
         internal int priority = 0;
         public List<G_Condition> preconditions = new List<G_Condition>();
         public List<G_Condition> effects = new List<G_Condition>();

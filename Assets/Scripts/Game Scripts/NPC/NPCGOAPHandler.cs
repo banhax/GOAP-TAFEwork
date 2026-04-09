@@ -21,6 +21,7 @@ namespace GOAP {
 
         [Header("Action Running")]
         G_Action currentAction;
+        [SerializeField]
         List<G_Action> currentPlan = new List<G_Action>();
         bool readyForNextAction = true; // flag once an action has ended so that we can go to the next one
 
@@ -129,7 +130,9 @@ namespace GOAP {
 
         void StartTest() {
             if (isPlanTest) {
-                currentPlan = testPlan;
+                for (int i = 0; i < testPlan.Count; i++) {
+                    currentPlan.Add(AddTestActionToPool(testPlan[i]));
+                }
                 StartAction(testPlan[0]);
             }
             else {

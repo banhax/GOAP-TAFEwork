@@ -55,10 +55,10 @@ namespace GOAP {
                 selfTradeValid = localInventory.CanTakeFromInventory(offeredItem, true);
             }
 
-            Debug.Log($"targetTradeValid ({targetTradeValid}) and selfTradeValid ({selfTradeValid})");
+            //Debug.Log($"targetTradeValid ({targetTradeValid}) and selfTradeValid ({selfTradeValid})");
 
             if (targetTradeValid && selfTradeValid) {
-                Debug.Log($"Trade was valid");
+                //Debug.Log($"Trade was valid");
                 tradeEndTime = Time.time + tradeTime;
                 // START RELEVANT ANIMATION HERE IF NEEDED
                 //if (extractionAnimationName != "") {
@@ -66,14 +66,14 @@ namespace GOAP {
                 //}
             }
             else {
-                Debug.Log($"Trade was NOT valid");
+                //Debug.Log($"Trade was NOT valid");
                 EndAction(false);
             }
         }
 
         public override void UpdateAction(NPCGOAPHandler NPC) {
             if (Time.time >= tradeEndTime) {
-                Debug.Log($"Start trade");
+                //Debug.Log($"Start trade");
                 ItemStack recievedStack;
                 bool success = targetInventoryRef.Trade(requestedItem, offeredItem, requestFullQuantity, out recievedStack);
                 
@@ -83,7 +83,10 @@ namespace GOAP {
 
                     localInventory.AddToInventory(recievedStack);
                 }
-                Debug.Log($"Was trade successful? {success}");
+                if (localInventory.IsGive(null, offeredItem)) {
+                    localInventory.SubtractFromInventory(offeredItem);
+                }
+                //Debug.Log($"Was trade successful? {success}");
 
                 //if(localInventory.IsTrade(requestedItem, offeredItem)) {
                 //    if (recievedStack.item == requestedItem.item
