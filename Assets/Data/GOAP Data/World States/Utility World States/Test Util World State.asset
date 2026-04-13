@@ -12,9 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0a84928428e2784ba28fa015a297783, type: 3}
   m_Name: Test Util World State
   m_EditorClassIdentifier: NewAssembly::G_UtilityWorldState
-  states: []
-  actionPool: []
-  goals: []
+  states:
+  - {fileID: 11400000, guid: cf10d79015afa0941b48459d20dfd993, type: 2}
+  - {fileID: 11400000, guid: 47ff3b9c4c83e064682fe1bd1db8b7ee, type: 2}
+  - {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+  - {fileID: 11400000, guid: d2274b8f3f559704ba29928b0a33cacf, type: 2}
+  - {fileID: 11400000, guid: 55be1686604c3604f8ae76489bce5e74, type: 2}
+  - {fileID: 11400000, guid: c9efde8e24ab0314eae4c03e8c686316, type: 2}
+  - {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
+  - {fileID: 11400000, guid: 16d62a3eba64fa54c93a6d9ed0f94116, type: 2}
+  - {fileID: 11400000, guid: be32781e4afc4194d868a11a6cae473c, type: 2}
+  - {fileID: 11400000, guid: 1b448088310b0154a89201ab6012a4e1, type: 2}
+  actionPool:
+  - {fileID: 11400000, guid: a6b92cd4d18caf74f8eceec997d7ba26, type: 2}
+  - {fileID: 11400000, guid: fb12f219b70d25044a167e6f4b11d748, type: 2}
+  - {fileID: 11400000, guid: f43d8744491e72249b016a42c10c8e78, type: 2}
+  - {fileID: 11400000, guid: 3821e73399f992b4d881330ba23e3b37, type: 2}
+  - {fileID: 11400000, guid: e75629f7e652d3749bae34a516ad3e0b, type: 2}
+  - {fileID: 11400000, guid: e20031db9a135c241af62e3acc255d03, type: 2}
+  - {fileID: 11400000, guid: bb8c54175eb421f4987e9319b91afd99, type: 2}
+  - {fileID: 11400000, guid: dd29375394d228e489209c6b0874c870, type: 2}
+  goals:
+  - {fileID: 11400000, guid: c0db279e7972f9a4cb5798592a7d199e, type: 2}
   utilityValues:
   - {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}
   - {fileID: 11400000, guid: efb665eb4133d2b49b5aa6ae376fe64c, type: 2}

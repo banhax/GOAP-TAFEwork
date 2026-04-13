@@ -7,6 +7,7 @@ using UtilityAI;
 public class G_UtilityGoal : G_Goal {
     [Header("Utility")]
     [SerializeField] U_Scorer utilityScorer = new U_Scorer();
+    public U_Scorer UtilityScorer { get { return utilityScorer; } }
 
     public override float GetPriority() {
         priority = utilityScorer.CalculateScore();

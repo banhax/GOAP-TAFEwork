@@ -36,15 +36,15 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  varSource: 0
+  varSource: 3
   floatVar: 0
   intVar: 0
-  floatStateVar: {fileID: 0}
+  floatStateVar: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
   intStateVar: {fileID: 0}
   utilityVar: {fileID: 0}
-  maxSource: 0
+  maxSource: 3
   floatMax: 0
   intMax: 0
-  floatStateMax: {fileID: 0}
+  floatStateMax: {fileID: 11400000, guid: 16d62a3eba64fa54c93a6d9ed0f94116, type: 2}
   intStateMax: {fileID: 0}
   utilityMax: {fileID: 0}
