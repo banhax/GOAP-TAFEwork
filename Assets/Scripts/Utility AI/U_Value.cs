@@ -3,7 +3,7 @@ using UnityEngine;
 using GOAP;
 
 namespace UtilityAI {
-    [CreateAssetMenu(fileName = "Utility Value", menuName = "Scriptable Objects/Utility Value")]
+    [CreateAssetMenu(fileName = "New U Value", menuName = "Utility AI/U Value")]
     public class U_Value : ScriptableObject {
         #region Variables
 
@@ -239,7 +239,7 @@ namespace UtilityAI {
         }
 
         void FindAndSetLocalValue(List<G_State> localStates, G_State refState, bool isVar) {
-            G_State foundState = localStates.Find((state) => state != null && state.name == refState.name);
+            G_State foundState = localStates.Find((state) => state != null && state.isLocal && state.name == refState.name);
 
             if (foundState != null) {
                 if (refState is G_IntState) {
