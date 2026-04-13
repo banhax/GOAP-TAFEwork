@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 280e3f386f5a6a9488b561253d84f8ce, type: 3}
-  m_Name: Test
+  m_Name: Energy
   m_EditorClassIdentifier: NewAssembly::UtilityAI.U_Value
   responseCurve:
     serializedVersion: 2

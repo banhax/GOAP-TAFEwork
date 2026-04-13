@@ -6,19 +6,23 @@ namespace GOAP {
 
     [CreateAssetMenu(fileName = "G_Goal", menuName = "GOAP/Goals/Base Goal")]
     public class G_Goal : ScriptableObject {
-        public int priority = 0;
+        public float priority = 0f;
 
         public List<G_Condition> triggerConditions = new List<G_Condition>();
         public List<G_Condition> goalEffects = new List<G_Condition>();
         public void Construct(string name,
             List<G_Condition> triggerConditions,
             List<G_Condition> goalEffects,
-            int priority = 0) {
+            float priority = 0) {
             
             this.name = name;
             this.triggerConditions = triggerConditions;
             this.goalEffects = goalEffects;
             this.priority = priority;
+        }
+
+        public virtual float GetPriority() {
+            return priority;
         }
 
         public bool CanStartGoal() {

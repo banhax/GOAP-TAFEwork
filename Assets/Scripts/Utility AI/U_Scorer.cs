@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace UtilityAI {
+    [System.Serializable]
     public class U_Scorer {
         #region Data
 
