@@ -17,7 +17,7 @@ MonoBehaviour:
   goalEffects: []
   utilityScorer:
     values:
-    - {fileID: 11400000, guid: efb665eb4133d2b49b5aa6ae376fe64c, type: 2}
+    - {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}
   references:
     version: 2
     RefIds: []
