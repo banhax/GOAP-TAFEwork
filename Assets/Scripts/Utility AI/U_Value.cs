@@ -23,6 +23,8 @@ namespace UtilityAI {
         [SerializeField] G_IntState intStateMax;
         [SerializeField] U_Value utilityMax;
 
+        float currentUtility = 0f;
+
         #endregion
 
         #region Properties
@@ -35,6 +37,7 @@ namespace UtilityAI {
         public G_IntState IntStateMax { get { return intStateMax; } }
         public U_Value UtilityVar { get { return utilityVar; } }
         public U_Value UtilityMax { get { return utilityMax; } }
+        public float CurrentUtility { get { return currentUtility; } }
 
         #endregion
 
@@ -126,6 +129,7 @@ namespace UtilityAI {
             }
 
             float result = responseCurve.Evaluate(percentage);
+            currentUtility = result;
 
             return result;
         }

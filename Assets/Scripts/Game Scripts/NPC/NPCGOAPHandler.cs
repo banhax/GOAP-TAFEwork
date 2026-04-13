@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UtilityAI;
 
 namespace GOAP {
     public class NPCGOAPHandler : MonoBehaviour
@@ -12,6 +14,7 @@ namespace GOAP {
         [SerializeField] List<G_State> localStates = new List<G_State>();
         [SerializeField] List<G_Action> localActions = new List<G_Action>();
         [SerializeField] List<G_Goal> localGoals = new List<G_Goal>();
+        [SerializeField] List<U_Value> localU_Values = new List<U_Value>();
 
         [Header("References")]
         MapInjector mapInjector = new MapInjector();
@@ -65,6 +68,18 @@ namespace GOAP {
                 StartTest();
             }
         }
+        private void Update() {
+            UpdateUtilities();
+            if (currentGoal == null || currentGoal != null && currentPlan.Count == 0) {
+                SelectGoal();
+            }
+            if (currentAction != null) {
+                UpdateCurrentAction();
+            }
+            else if (readyForNextAction && currentPlan.Count > 0 && currentPlan[0] != null) {
+                StartAction(currentPlan[0]);
+            }
+        }
 
         void AssignInventoryState(G_Inventory inventoryState) {
             if (inventoryState.name == inventory.GetWorldState().name) {
@@ -92,12 +107,28 @@ namespace GOAP {
                 for (int i = 0; i < worldStateReference.actionPool.Count; i++) {
                     TryTransferAction(localActions, localStates, worldStateReference.actionPool[i]);
                 }
-                for (int i = 0; i < worldStateReference.goals.Count; i++) {
+                if (worldStateReference is G_UtilityWorldState utilityWorldState) {
+                    TryTransferU_Values(utilityWorldState);
+                    ProcessGoals();
+                    localWorldState = ScriptableObject.CreateInstance<G_UtilityWorldState>();
+                    ((G_UtilityWorldState)localWorldState).Construct(localStates, localActions, localGoals, localU_Values);
+                }
+                else {
+                    ProcessGoals();
+                    localWorldState = ScriptableObject.CreateInstance<G_WorldState>();
+                    localWorldState.Construct(localStates, localActions, localGoals);
+                }
+            }
+        }
+
+        void ProcessGoals() {
+            for (int i = 0; i < worldStateReference.goals.Count; i++) {
+                if (worldStateReference.goals[i] is G_UtilityGoal utilityGoal) {
+                    TryTransferGoal(localGoals, localStates, localU_Values, utilityGoal);
+                }
+                else {
                     TryTransferGoal(localGoals, localStates, worldStateReference.goals[i]);
                 }
-
-                localWorldState = ScriptableObject.CreateInstance<G_WorldState>();
-                localWorldState.Construct(localStates, localActions, localGoals);
             }
         }
 
@@ -125,6 +156,26 @@ namespace GOAP {
                 G_Goal clonedGoal = goalToAdd.Clone();
                 clonedGoal.TransferToLocalWorldStates(localStates);
                 localGoalPool.Add(clonedGoal);
+            }
+        }
+
+        void TryTransferGoal(List<G_Goal> localGoalPool, List<G_State> localStates, List<U_Value> localU_Values, G_UtilityGoal goalToAdd) {
+            if (goalToAdd != null) {
+                G_UtilityGoal clonedGoal = goalToAdd.Clone() as G_UtilityGoal;
+                clonedGoal.TransferToLocalWorldStates(localStates);
+                clonedGoal.AssignLocalValues(localU_Values);
+                localGoalPool.Add(clonedGoal);
+            }
+        }
+
+        void TryTransferU_Values(G_UtilityWorldState worldRef) {
+            for (int i = 0; i < worldRef.utilityValues.Count; i++) {
+                localU_Values.Add(worldRef.utilityValues[i].Clone());
+            }
+            for (int i = 0; i < worldRef.utilityValues.Count; i++) {
+                if (localU_Values[i] != null) {
+                    localU_Values[i].AssignLocalValues(localU_Values, localStates);
+                }
             }
         }
 
@@ -158,32 +209,20 @@ namespace GOAP {
 
         #region Action Running
 
-        private void Update() {
-            //Debug.Log($"currentGoal = {currentGoal}");
-            //Debug.Log($"currentPlan.Count = {currentPlan.Count}");
-            if (currentGoal == null || currentGoal != null && currentPlan.Count == 0) {
-                SelectGoal();
-            }
-            if (currentAction != null) {
-                UpdateCurrentAction();
-            }
-            else if (readyForNextAction && currentPlan.Count > 0 && currentPlan[0] != null) {
-                //Debug.Log($"currentPlan[0] = {currentPlan[0]}");
-                StartAction(currentPlan[0]);
-            }
-        }
-
         void SelectGoal() {
-            //Debug.Log($"Selecting goal");
+            Debug.Log($"plan goal");
             List<G_Action> tempPlan = new List<G_Action>();
+
+            for (int i = 0; i < localWorldState.goals.Count; i++) {
+                localWorldState.goals[i].GetPriority();
+            }
+            localWorldState.OrderGoalsByPriority();
+
             for (int i = 0; i < localWorldState.goals.Count; i++) {
                 if (G_Planner.GeneratePlan(localWorldState.goals[i], localWorldState, out tempPlan)) {
-                    //Debug.Log($"localWorldState.goals[{i}] = {localWorldState.goals[i]}");
+                    Debug.Log($"planned goal successfully");
                     currentGoal = localWorldState.goals[i];
                     currentPlan = tempPlan;
-                    for (int g = 0; g < tempPlan.Count; g++) {
-                        //Debug.Log($"tempPlan action #{g} = {tempPlan[g]}");
-                    }
                 }
             }
         }
@@ -260,6 +299,22 @@ namespace GOAP {
 
         public Inventory GetInventory() {
             return inventory;
+        }
+
+        #endregion
+
+        #region Utilities
+
+        void UpdateUtilities() {
+            for (int i = 0; i < localU_Values.Count; i++) {
+                if (localU_Values[i] != null) {
+                    localU_Values[i].GetUtility();
+                }
+            }
+        }
+
+        void CheckForInterrupts() {
+
         }
 
         #endregion
