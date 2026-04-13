@@ -6,6 +6,7 @@ using UtilityAI;
 [CreateAssetMenu(fileName = "New Utility Goal", menuName = "GOAP/Goals/Utility Goal")]
 public class G_UtilityGoal : G_Goal {
     [Header("Utility")]
+    public bool canInterrupt = false;
     [SerializeField] U_Scorer utilityScorer = new U_Scorer();
     public U_Scorer UtilityScorer { get { return utilityScorer; } }
 
@@ -19,10 +20,12 @@ public class G_UtilityGoal : G_Goal {
         List<G_Condition> triggerConditions,
         List<G_Condition> goalEffects,
         float priority,
+        bool canInterrupt,
         U_Scorer utilityScorer) {
 
         Construct(name, triggerConditions, goalEffects, priority);
         this.utilityScorer = utilityScorer;
+        this.canInterrupt = canInterrupt;
     }
     
     public void AssignLocalValues(List<U_Value> localValues) {
@@ -45,6 +48,7 @@ public class G_UtilityGoal : G_Goal {
             clonedTriggers,
             clonedEffects,
             this.priority,
+            this.canInterrupt,
             this.utilityScorer.Clone());
         return clonedGoal;
     }

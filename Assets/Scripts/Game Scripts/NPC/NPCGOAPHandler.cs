@@ -31,6 +31,7 @@ namespace GOAP {
 
         [Header("Goal Selection")]
         [SerializeField] G_Goal currentGoal;
+        [SerializeField] bool includeInterrupts = false;
 
         [Header("Testing")]
         public bool isTest = false;
@@ -71,7 +72,7 @@ namespace GOAP {
         private void Update() {
             UpdateUtilities();
             if (currentGoal == null || currentGoal != null && currentPlan.Count == 0) {
-                SelectGoal();
+                SelectGoal(true);
             }
             if (currentAction != null) {
                 UpdateCurrentAction();
@@ -209,12 +210,14 @@ namespace GOAP {
 
         #region Action Running
 
-        void SelectGoal() {
+        void SelectGoal(bool recalculatePriority) {
             Debug.Log($"plan goal");
             List<G_Action> tempPlan = new List<G_Action>();
 
-            for (int i = 0; i < localWorldState.goals.Count; i++) {
-                localWorldState.goals[i].GetPriority();
+            if (recalculatePriority) {
+                for (int i = 0; i < localWorldState.goals.Count; i++) {
+                    localWorldState.goals[i].GetPriority();
+                }
             }
             localWorldState.OrderGoalsByPriority();
 
@@ -311,10 +314,13 @@ namespace GOAP {
                     localU_Values[i].GetUtility();
                 }
             }
-        }
+            if (includeInterrupts) {
+                G_Goal possibleInterrupt = (localWorldState as G_UtilityWorldState).CheckForInterrupts(currentGoal);
 
-        void CheckForInterrupts() {
-
+                if (possibleInterrupt != currentGoal) {
+                    SelectGoal(false);
+                }
+            }
         }
 
         #endregion
