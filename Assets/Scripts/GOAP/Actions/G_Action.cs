@@ -88,7 +88,7 @@ namespace GOAP {
             return priority;
         }
 
-        public void TransferToLocalWorldStates(List<G_State> localStates) {
+        public virtual void TransferToLocalWorldStates(List<G_State> localStates) {
             for (int i = 0; i < preconditions.Count; i++) {
                 preconditions[i].TrySwitchToLocalState(localStates);
             }
