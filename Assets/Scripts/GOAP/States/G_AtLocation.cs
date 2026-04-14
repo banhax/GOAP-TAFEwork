@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace GOAP {
     [CreateAssetMenu(fileName = "New At Location State", menuName = "GOAP/States/At Location State")]
-    public class G_AtLocation : G_State   {
+    public class G_AtLocation : G_State {
         [SerializeField]
         LocationType value;
 
@@ -18,6 +18,7 @@ namespace GOAP {
 
         public override void SetValue(object value) {
             this.value = (LocationType)value;
+            SendUpdate(this.value);
         }
 
         public override object GetValue() {

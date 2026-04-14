@@ -19,6 +19,7 @@ namespace GOAP {
 
         public override void SetValue(object value) {
             this.value = value as Inventory;
+            SendUpdate(this.value);
         }
 
         public override object GetValue() {

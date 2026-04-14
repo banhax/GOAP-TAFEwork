@@ -9,6 +9,12 @@ namespace GOAP {
         object value;
         public bool isLocal = false;
 
+        internal event DelegateTypes.Void_object valueChanged;
+        public event DelegateTypes.Void_object ValueChanged { 
+            add { valueChanged += value; } 
+            remove { valueChanged -= value; } 
+        }
+
         #region Basic Controls
 
         public virtual void Construct(string name, object value, bool isLocal) {
@@ -19,6 +25,11 @@ namespace GOAP {
 
         public virtual void SetValue(object value) {
             this.value = value;
+            SendUpdate(this.value);
+        }
+
+        internal void SendUpdate(object value) {
+            valueChanged?.Invoke(value);
         }
 
         public virtual object GetValue() {

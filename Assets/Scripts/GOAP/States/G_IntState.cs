@@ -19,7 +19,8 @@ namespace GOAP {
 
         public override void SetValue(object value) {
             if (TestValueMatch(value)) {
-                this.value = (int)value;   
+                this.value = (int)value;
+                SendUpdate(this.value);
             }
         }
 
