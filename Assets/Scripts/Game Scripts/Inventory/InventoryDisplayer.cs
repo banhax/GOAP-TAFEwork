@@ -5,23 +5,20 @@ using GOAP;
 public class InventoryDisplayer : MonoBehaviour {
 
     public List<Item> observedItems = new List<Item>();
-    G_Inventory observedState;
+    public ValueTracker trackerReference;
+    Inventory inventory;
 
     void Start() {
-        Inventory inventory = GetComponent<Inventory>();
+        inventory = GetComponent<Inventory>();
         if (inventory != null) {
-            G_Inventory tempState = inventory.GetWorldState();
-
-            if (tempState != null) {
-                observedState = tempState;
-                observedState.ValueChanged += RecieveUpdate;
-            }
+            inventory.InventoryUpdated += RecieveUpdate;
+            RecieveUpdate(inventory);
         }
     }
 
     private void OnDestroy() {
-        if (observedState != null) {
-            observedState.ValueChanged -= RecieveUpdate;
+        if (inventory != null) {
+            inventory.InventoryUpdated -= RecieveUpdate;
         }
     }
 
@@ -41,6 +38,10 @@ public class InventoryDisplayer : MonoBehaviour {
             }
 
             displayStrings.Add(displayText);
+        }
+
+        if (trackerReference != null) {
+            trackerReference.Track(displayStrings);
         }
     }
 }

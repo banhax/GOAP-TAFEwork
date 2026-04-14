@@ -13,6 +13,12 @@ public class Inventory : MonoBehaviour
     [SerializeField] G_Inventory refInventoryState;
     [SerializeField] G_Inventory inventoryState;
 
+    internal event DelegateTypes.Void_object inventoryUpdated;
+    public event DelegateTypes.Void_object InventoryUpdated {
+        add { inventoryUpdated += value; }
+        remove { inventoryUpdated -= value; }
+    }
+
     private void Awake() { // when object is loaded
         mapInjector.FindAndInjectObject(transform.position, this);
 
@@ -55,6 +61,7 @@ public class Inventory : MonoBehaviour
         else {
             inventory.Add(new ItemStack(stack));
         }
+        inventoryUpdated?.Invoke(this);
     }
 
     public int SubtractFromInventory(ItemStack stack) {
@@ -73,6 +80,7 @@ public class Inventory : MonoBehaviour
             if (stackToSubtract.quantity <= 0) {
                 inventory.Remove(stackToSubtract);
             }
+            inventoryUpdated?.Invoke(this);
         }
         else {
             subtraction = 0;
