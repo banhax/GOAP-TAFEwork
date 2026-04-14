@@ -9,6 +9,7 @@ public class G_Eat : G_Action {
     public float consumptionTime;
     public ItemStack foodItem;
     public G_FloatState currentHunger;
+    public float fullnessAdded = 100;
     // public string animationTrigger = ""; // for triggering eat animation later
 
     Inventory localInventory;
@@ -23,6 +24,7 @@ public class G_Eat : G_Action {
         ItemStack foodStack = localInventory.FindInInventory(foodItem.item);
         if (foodStack != null) {
             endConsumptionTime = Time.time + consumptionTime;
+            currentHunger.SetValue(fullnessAdded);
         }
         else {
             EndAction(false);
@@ -37,7 +39,6 @@ public class G_Eat : G_Action {
 
     internal override void EndAction(bool success) {
         localInventory.SubtractFromInventory(foodItem);
-        currentHunger.SetValue(100);
         localInventory = null;
         base.EndAction(success);
     }
@@ -52,12 +53,14 @@ public class G_Eat : G_Action {
             int priority,
             float consumptionTime,
             ItemStack foodItem,
-            G_FloatState currentHunger) {
+            G_FloatState currentHunger,
+            float fullnessAdded) {
 
         Construct(name, preconditions, effects, cost, priority);
         this.consumptionTime = consumptionTime;
         this.foodItem = foodItem;
         this.currentHunger = currentHunger;
+        this.fullnessAdded = fullnessAdded;
     }
 
     public override void TransferToLocalWorldStates(List<G_State> localStates) {
@@ -88,7 +91,8 @@ public class G_Eat : G_Action {
             this.priority,
             this.consumptionTime,
             this.foodItem,
-            this.currentHunger);
+            this.currentHunger,
+            this.fullnessAdded);
         return clonedAction;
     }
     #endregion

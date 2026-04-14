@@ -23,7 +23,7 @@ namespace UtilityAI {
         [SerializeField] G_IntState intStateMax;
         [SerializeField] U_Value utilityMax;
 
-        float currentUtility = 0f;
+        [SerializeField] float currentUtility = 0f;
 
         #endregion
 

@@ -6,13 +6,15 @@ using UtilityAI;
 public class NPCStatManager : MonoBehaviour {
     [Header("Energy")]
     public G_FloatState refCurrentEnergy;
-    G_FloatState currentEnergy;
+    public G_FloatState maxCurrentEnergy;
+    [SerializeField] G_FloatState currentEnergy;
     public float energyIncrementRate = 1f;
 
     [Header("Fullness")]
     public G_FloatState refCurrentFullness;
-    G_FloatState currentFullness;
-    public float hungerIncrementRate = 1f;
+    public G_FloatState maxCurrentFullness;
+    [SerializeField] G_FloatState currentFullness;
+    public float hungerIncrementRate = -1f;
     public U_Value hunger;
 
     [Header("Energy Hunger Relationship")]
@@ -30,8 +32,25 @@ public class NPCStatManager : MonoBehaviour {
 
     void Update() {
         DetermineEnergyMultiplier();
+
+        
+
         currentEnergy.AddToValue(energyIncrementRate * currentMultiplier * Time.deltaTime);
         currentFullness.AddToValue(hungerIncrementRate * Time.deltaTime);
+        ClampValues(currentEnergy, maxCurrentEnergy);
+        ClampValues(currentFullness, maxCurrentFullness);
+    }
+
+    void ClampValues(G_FloatState currentValue, G_FloatState maxValue) {
+        float current = (float)currentValue.GetValue();
+        float max = (float)maxValue.GetValue();
+
+        if (current > max) {
+            currentValue.SetValue((float)maxValue.GetValue());
+        }
+        else if (current < 0) {
+            currentValue.SetValue(0);
+        }
     }
 
     void DetermineEnergyMultiplier() {

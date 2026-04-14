@@ -8,9 +8,13 @@ using UtilityAI;
 public class U_ValueEditor : Editor {
     public override void OnInspectorGUI() {
         // base.OnInspectorGUI();
+        SerializedProperty currentUtility = serializedObject.FindProperty("currentUtility");
         SerializedProperty varSource = serializedObject.FindProperty("varSource");
         SerializedProperty maxSource = serializedObject.FindProperty("maxSource");
         SerializedProperty responseCurve = serializedObject.FindProperty("responseCurve");
+
+        EditorGUILayout.LabelField("Current Utility", EditorStyles.boldLabel);
+        EditorGUILayout.LabelField(currentUtility.floatValue.ToString());
 
         EditorGUILayout.LabelField("Controls", EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(responseCurve);

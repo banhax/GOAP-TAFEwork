@@ -1215,13 +1215,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: NewAssembly::NPCStatManager
   refCurrentEnergy: {fileID: 11400000, guid: be32781e4afc4194d868a11a6cae473c, type: 2}
+  maxCurrentEnergy: {fileID: 11400000, guid: 1b448088310b0154a89201ab6012a4e1, type: 2}
+  currentEnergy: {fileID: 0}
   energyIncrementRate: 1
   refCurrentFullness: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
+  maxCurrentFullness: {fileID: 11400000, guid: 16d62a3eba64fa54c93a6d9ed0f94116, type: 2}
+  currentFullness: {fileID: 0}
   hungerIncrementRate: -1
   hunger: {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}
-  regainThreshold: 0.85
+  regainThreshold: 0.15
   regainMultiplier: 1
-  loseThreshold: 0.8
+  loseThreshold: 0.2
   lossMultiplier: -1
 --- !u!1001 &7027656113504785805
 PrefabInstance:
