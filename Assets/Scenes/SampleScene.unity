@@ -1226,7 +1226,7 @@ MonoBehaviour:
   regainThreshold: 0.15
   regainMultiplier: 1
   loseThreshold: 0.2
-  lossMultiplier: -1
+  lossMultiplier: -2
 --- !u!1001 &7027656113504785805
 PrefabInstance:
   m_ObjectHideFlags: 0
