@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Maximum Energy
   m_EditorClassIdentifier: NewAssembly::GOAP.G_FloatState
   isLocal: 0
+  value: 100

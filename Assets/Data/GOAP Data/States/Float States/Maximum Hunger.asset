@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Maximum Hunger
   m_EditorClassIdentifier: NewAssembly::GOAP.G_FloatState
   isLocal: 0
+  value: 100

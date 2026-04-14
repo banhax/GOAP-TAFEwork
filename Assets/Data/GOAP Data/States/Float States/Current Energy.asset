@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5294dd92ddb45baa6df9b8245115bc, type: 3}
   m_Name: Current Energy
   m_EditorClassIdentifier: NewAssembly::GOAP.G_FloatState
-  isLocal: 0
+  isLocal: 1
+  value: 0

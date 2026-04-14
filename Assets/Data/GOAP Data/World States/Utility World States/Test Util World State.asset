@@ -33,7 +33,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bb8c54175eb421f4987e9319b91afd99, type: 2}
   - {fileID: 11400000, guid: dd29375394d228e489209c6b0874c870, type: 2}
   goals:
-  - {fileID: 11400000, guid: c0db279e7972f9a4cb5798592a7d199e, type: 2}
+  - {fileID: 11400000, guid: ade613dad106683409796eee90971055, type: 2}
+  - {fileID: 11400000, guid: 3eaf2dbab9282924f85794d2cc50d6c4, type: 2}
   utilityValues:
-  - {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}
   - {fileID: 11400000, guid: efb665eb4133d2b49b5aa6ae376fe64c, type: 2}
+  - {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}

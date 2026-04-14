@@ -65,6 +65,11 @@ namespace GOAP {
                 }
             }
 
+            NPCStatManager stats = GetComponent<NPCStatManager>();
+            if (stats != null && localWorldState is G_UtilityWorldState utilityWorldState) {
+                stats.InjectLocalWorldState(utilityWorldState);
+            }
+
             if (isTest) {
                 StartTest();
             }
