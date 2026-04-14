@@ -8,11 +8,17 @@ public class InventoryDisplayer : MonoBehaviour {
     public ValueTracker trackerReference;
     Inventory inventory;
 
+    [Header("Win Condition")]
+    public GameObject winGUI;
+    public G_Condition winCondition;
+
     void Start() {
         inventory = GetComponent<Inventory>();
         if (inventory != null) {
             inventory.InventoryUpdated += RecieveUpdate;
             RecieveUpdate(inventory);
+            //G_Inventory tempState = inventory.GetWorldState();
+            winCondition.TrySwitchToLocalState(inventory.GetWorldState());
         }
     }
 
@@ -42,6 +48,10 @@ public class InventoryDisplayer : MonoBehaviour {
 
         if (trackerReference != null) {
             trackerReference.Track(displayStrings);
+        }
+
+        if (winCondition.DoesStateMeetCondition()) {
+            winGUI?.SetActive(true);
         }
     }
 }

@@ -155,6 +155,12 @@ namespace GOAP {
             }
         }
 
+        public void TrySwitchToLocalState(G_State localState) {
+            if (CanSwitchToLocalState() && localState != null) {
+                this.SetState(localState);
+            }
+        }
+
         public static G_Condition Clone(G_Condition conditionToClone) {
             return A.Condition().State(conditionToClone.state)
             .WithComparison(conditionToClone.comparison)
