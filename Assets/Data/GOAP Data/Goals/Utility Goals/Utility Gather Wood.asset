@@ -24,7 +24,7 @@ MonoBehaviour:
     editorActive: 1
   goalEffects:
   - state: {fileID: 11400000, guid: cf10d79015afa0941b48459d20dfd993, type: 2}
-    comparison: 0
+    comparison: 4
     expectedValue:
       rid: 5606664098390474753
     expectedReference: {fileID: 0}

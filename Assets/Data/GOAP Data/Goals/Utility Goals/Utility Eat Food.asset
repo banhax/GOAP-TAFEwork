@@ -17,18 +17,18 @@ MonoBehaviour:
   - state: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
     comparison: 3
     expectedValue:
-      rid: 5606664098390475612
+      rid: 5606664100306485608
     expectedReference: {fileID: 0}
-    useExpectedReference: 1
+    useExpectedReference: 0
     serializedExpectedValue: f100
     editorActive: 1
   goalEffects:
   - state: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
     comparison: 0
     expectedValue:
-      rid: 5606664098390475613
+      rid: 5606664100306485609
     expectedReference: {fileID: 0}
-    useExpectedReference: 1
+    useExpectedReference: 0
     serializedExpectedValue: f100
     editorActive: 1
   canInterrupt: 0
@@ -38,9 +38,9 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
-    - rid: 5606664098390475612
+    - rid: 5606664100306485608
       type: {class: Single, ns: System, asm: mscorlib}
       data: 
-    - rid: 5606664098390475613
+    - rid: 5606664100306485609
       type: {class: Single, ns: System, asm: mscorlib}
       data: 

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Current Energy
   m_EditorClassIdentifier: NewAssembly::GOAP.G_FloatState
   isLocal: 1
-  value: 0
+  value: 101.11821

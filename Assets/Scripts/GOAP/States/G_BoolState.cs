@@ -175,7 +175,7 @@ namespace GOAP {
                 expectedValue.managedReferenceValue = false;
                 property.FindPropertyRelative("serializedExpectedValue").stringValue = "b" + false.ToString();
                 property.FindPropertyRelative("expectedReference").objectReferenceValue = null;
-                property.FindPropertyRelative("useExpectedReference").boolValue = true;
+                property.FindPropertyRelative("useExpectedReference").boolValue = false;
             }
 
             Rect comparisonRect = new Rect(position.x,

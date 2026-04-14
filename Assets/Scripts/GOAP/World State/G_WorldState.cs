@@ -17,7 +17,7 @@ namespace GOAP {
         }
 
         public void OrderGoalsByPriority() {
-            goals = goals.OrderBy((goal) => goal.priority).ToList();
+            goals = goals.OrderByDescending((goal) => goal.priority).ToList();
         }
 
         public G_State FindState(G_State referenceState) {

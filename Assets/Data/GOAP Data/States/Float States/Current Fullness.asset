@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Current Fullness
   m_EditorClassIdentifier: NewAssembly::GOAP.G_FloatState
   isLocal: 1
-  value: 0
+  value: 98.88179

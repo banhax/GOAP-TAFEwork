@@ -16,10 +16,10 @@ public class NPCStatManager : MonoBehaviour {
     public U_Value hunger;
 
     [Header("Energy Hunger Relationship")]
-    public float regainThreshold = 0.85f;
-    public float regainMultiplier = 1f;
-    public float loseThreshold = 0.8f;
-    public float lossMultiplier = -1f;
+    public float regainThreshold = 0.15f;
+    public float regainMultiplier = 1;
+    public float loseThreshold = 0.2f;
+    public float lossMultiplier = -1;
     float currentMultiplier = 0f;
 
     public void InjectLocalWorldState(G_UtilityWorldState worldState) {
@@ -37,13 +37,13 @@ public class NPCStatManager : MonoBehaviour {
     void DetermineEnergyMultiplier() {
         float currentHungerUtil = hunger.GetUtility();
 
-        if (currentHungerUtil >= regainThreshold) {
+        if (currentHungerUtil <= regainThreshold) {
             currentMultiplier = regainMultiplier;
         }
-        else if (currentHungerUtil < regainThreshold && currentHungerUtil >= loseThreshold) {
+        else if (currentHungerUtil > regainThreshold && currentHungerUtil <= loseThreshold) {
             currentMultiplier = 0f;
         }
-        else if (currentHungerUtil < loseThreshold) {
+        else if (currentHungerUtil > loseThreshold) {
             currentMultiplier = lossMultiplier;
         }
     }
