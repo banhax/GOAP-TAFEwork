@@ -32,6 +32,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e20031db9a135c241af62e3acc255d03, type: 2}
   - {fileID: 11400000, guid: bb8c54175eb421f4987e9319b91afd99, type: 2}
   - {fileID: 11400000, guid: dd29375394d228e489209c6b0874c870, type: 2}
+  - {fileID: 11400000, guid: 1c0fe423d6a6a2341bcee9cfb967a759, type: 2}
+  - {fileID: 11400000, guid: b88a07a3b3438484eabb3b20ad41edcf, type: 2}
   goals:
   - {fileID: 11400000, guid: ade613dad106683409796eee90971055, type: 2}
   - {fileID: 11400000, guid: 3eaf2dbab9282924f85794d2cc50d6c4, type: 2}

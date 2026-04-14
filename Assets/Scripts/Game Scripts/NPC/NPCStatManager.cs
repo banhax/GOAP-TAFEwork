@@ -9,9 +9,9 @@ public class NPCStatManager : MonoBehaviour {
     G_FloatState currentEnergy;
     public float energyIncrementRate = 1f;
 
-    [Header("Hunger")]
-    public G_FloatState refCurrentHunger;
-    G_FloatState currentHunger;
+    [Header("Fullness")]
+    public G_FloatState refCurrentFullness;
+    G_FloatState currentFullness;
     public float hungerIncrementRate = 1f;
     public U_Value hunger;
 
@@ -24,14 +24,14 @@ public class NPCStatManager : MonoBehaviour {
 
     public void InjectLocalWorldState(G_UtilityWorldState worldState) {
         currentEnergy = worldState.FindState(refCurrentEnergy) as G_FloatState;
-        currentHunger = worldState.FindState(refCurrentHunger) as G_FloatState;
+        currentFullness = worldState.FindState(refCurrentFullness) as G_FloatState;
         hunger = worldState.FindU_Value(hunger);
     }
 
     void Update() {
         DetermineEnergyMultiplier();
         currentEnergy.AddToValue(energyIncrementRate * currentMultiplier * Time.deltaTime);
-        currentHunger.AddToValue(hungerIncrementRate * Time.deltaTime);
+        currentFullness.AddToValue(hungerIncrementRate * Time.deltaTime);
     }
 
     void DetermineEnergyMultiplier() {

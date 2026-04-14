@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 673eda3df8d9ecd43a6f26ae61feab56, type: 3}
+  m_Name: Eat Burger
+  m_EditorClassIdentifier: NewAssembly::G_Eat
+  cost: 10
+  priority: 0
+  preconditions:
+  - state: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+    comparison: 4
+    expectedValue:
+      rid: 5606664098390475458
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  effects:
+  - state: {fileID: 11400000, guid: d7e52e1b5123a424482a4c748c731a4f, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606664098390475459
+    expectedReference: {fileID: 0}
+    useExpectedReference: 0
+    serializedExpectedValue: 
+    editorActive: 1
+  - state: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
+    comparison: 0
+    expectedValue:
+      rid: 5606664098390475615
+    expectedReference: {fileID: 0}
+    useExpectedReference: 1
+    serializedExpectedValue: f100
+    editorActive: 1
+  consumptionTime: 5
+  foodItem:
+    item: {fileID: 11400000, guid: 6c7291a864d63fc46aaf2e15ca4d2403, type: 2}
+    quantity: 1
+  currentHunger: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 5606664098390475458
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 6c7291a864d63fc46aaf2e15ca4d2403, type: 2}
+        quantity: 1
+    - rid: 5606664098390475459
+      type: {class: ItemStack, ns: , asm: NewAssembly}
+      data:
+        item: {fileID: 11400000, guid: 6c7291a864d63fc46aaf2e15ca4d2403, type: 2}
+        quantity: 0
+    - rid: 5606664098390475615
+      type: {class: Single, ns: System, asm: mscorlib}
+      data: 

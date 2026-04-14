@@ -945,14 +945,22 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 86673683602873593, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
       propertyPath: inventory.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 86673683602873593, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
       propertyPath: inventory.Array.data[0].item
       value: 
       objectReference: {fileID: 11400000, guid: d08111f1bccd31348973f34a60420543, type: 2}
     - target: {fileID: 86673683602873593, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
+      propertyPath: inventory.Array.data[1].item
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c7291a864d63fc46aaf2e15ca4d2403, type: 2}
+    - target: {fileID: 86673683602873593, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
       propertyPath: inventory.Array.data[0].quantity
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 86673683602873593, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
+      propertyPath: inventory.Array.data[1].quantity
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4632753582641059928, guid: 1c4883c8f9573cb428ee59cc9a8c17b6, type: 3}
@@ -1206,10 +1214,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab5d209d65fa6b4f888564631f14d94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: NewAssembly::NPCStatManager
-  currentEnergy: {fileID: 11400000, guid: be32781e4afc4194d868a11a6cae473c, type: 2}
+  refCurrentEnergy: {fileID: 11400000, guid: be32781e4afc4194d868a11a6cae473c, type: 2}
   energyIncrementRate: 1
-  currentHunger: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
-  hungerIncrementRate: 1
+  refCurrentFullness: {fileID: 11400000, guid: d6175094f4fa5c046aea12cc51f918fd, type: 2}
+  hungerIncrementRate: -1
   hunger: {fileID: 11400000, guid: a3b15994ccdbca14dbffeb0fec15990d, type: 2}
   regainThreshold: 0.85
   regainMultiplier: 1
