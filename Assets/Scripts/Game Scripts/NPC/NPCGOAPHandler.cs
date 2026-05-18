@@ -24,7 +24,7 @@ namespace GOAP {
 
         [Header("Action Running")]
         [SerializeField]
-        G_Action currentAction;
+        public G_Action currentAction;
         [SerializeField]
         List<G_Action> currentPlan = new List<G_Action>();
         bool readyForNextAction = true; // flag once an action has ended so that we can go to the next one
